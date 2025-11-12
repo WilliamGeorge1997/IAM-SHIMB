@@ -4,189 +4,237 @@
 @endsection
 
 @section('content')
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-                <div class="d-inline-flex align-items-center gap-3 mb-3 hero-badge">
-                    <span class="badge rounded-pill bg-primary text-uppercase">IAM-SHIMB</span>
-                    <small class="text-primary fw-semibold text-uppercase letter-spaced">Integrated Assessment Model</small>
-                </div>
-                <h1 class="hero-title mb-4">Sustainable, Healthy & Intelligent Mega Buildings Assessment</h1>
-                <p class="hero-subtitle mb-4">
-                    AASTMT’s web program empowers decision-makers to measure sustainability, wellbeing, and smart-readiness for future-focused mega projects.
-                </p>
-                <div class="d-flex flex-wrap gap-3">
-                    <a  class="btn btn-success btn-lg cta-btn shadow-sm">Start Assessment</a>
-                    <a  class="btn btn-outline-primary btn-lg cta-btn cta-btn-outline">About the Program</a>
-                    <a  class="btn btn-primary btn-lg cta-btn">Help Center</a>
-                    <a  class="btn btn-secondary btn-lg cta-btn">Print Reports</a>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="floating-card p-4 p-md-5">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="mb-0 text-primary fw-bold text-uppercase letter-spaced-sm">Research & Oversight</h5>
-                        <span class="badge bg-light text-primary text-uppercase">AASTMT</span>
-                    </div>
-                    <img src="{{ asset('assets/images/logo.webp') }}" class="img-fluid mb-4" alt="AASTMT Logo">
-                    <p class="text-muted mb-0">
-                        PhD Researcher: <strong>Dr. Esraa Ayman Elgezery</strong>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-7">
+                    <h1 class="hero-title">IAM-SHIMB</h1>
+                    <h3 class="hero-subtitle">Integrated Assessment Model for Sustainable, Healthy and Intelligent Mega
+                        Buildings</h3>
+                    <p class="hero-description">
+                        A comprehensive web-based platform for evaluating and optimizing building sustainability,
+                        health, and intelligence across multiple assessment criteria. Transform your building projects
+                        with data-driven insights and cutting-edge evaluation tools.
                     </p>
+                    <div class="hero-actions d-flex flex-wrap gap-3">
+                        <a class="btn btn-custom btn-lg">
+                            <span><i class="bi bi-play-circle me-2"></i>Start Assessment</span>
+                        </a>
+                        <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-info-circle me-2"></i>Learn More
+                        </a>
+                    </div>
                 </div>
-                <div class="professors-card mt-4 p-4 p-md-5">
-                    <h5 class="mb-4 text-uppercase letter-spaced-sm">Supervision Board</h5>
-                    <ul class="mb-0">
-                        <li>
-                            <strong>Prof. Dr. Wael Kamel</strong><br>
-                            Construction & Building Engineering Department
-                        </li>
-                        <li>
-                            <strong>Prof. Dr. Sherine Shafik Aly</strong><br>
-                            Architecture Engineering & Environmental Design Department
-                        </li>
-                        <li>
-                            <strong>Prof. Dr. Tarek Farghaly</strong><br>
-                            Architecture Engineering Department, Faculty of Engineering, Alexandria University
-                        </li>
-                    </ul>
+                <div class="col-lg-5 text-center d-none d-lg-block">
+                    <img src="{{ asset('assets/images/logo.webp') }}" alt="IAM-SHIMB" class="hero-logo"
+                        style="max-width: 300px; opacity: 0.3;">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="section-heading mb-4">
-            <span class="section-kicker">Program at a Glance</span>
-            <h2 class="fw-bold">Real-time indicators that guide your project decisions</h2>
-            <p class="text-muted mb-0">Follow the gauges to benchmark where your building stands across sustainability, health, and intelligence dimensions.</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-6 col-xl-3">
-                <div class="data-metric h-100">
-                    <div class="metric-header">
-                        <span class="metric-label text-uppercase">Overall Earned Points</span>
-                        <span class="badge bg-success-subtle text-success fw-semibold">54 / 60</span>
+    <!-- Statistics Section -->
+    <section class="section-spacing fade-in">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-3 col-6">
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </div>
+                        <h3 class="stat-number">10</h3>
+                        <p class="stat-label">Building Types</p>
                     </div>
-                    <h3 class="metric-value">90% Completion</h3>
-                    <p class="metric-description">Your current assessment captures the majority of IAM-SHIMB essential indicators.</p>
                 </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="data-metric h-100">
-                    <span class="metric-label text-uppercase text-warning">Sustainable Healthy Intelligent Building</span>
-                    <h3 class="metric-value">87 / 99</h3>
-                    <p class="metric-description">Balanced score across environment, energy, mobility, and innovation groups.</p>
+                <div class="col-md-3 col-6">
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-list-check"></i>
+                        </div>
+                        <h3 class="stat-number">17</h3>
+                        <p class="stat-label">Assessment Groups</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="data-metric h-100">
-                    <span class="metric-label text-uppercase text-info">Healthy Building</span>
-                    <h3 class="metric-value">59 / 66</h3>
-                    <p class="metric-description">Indoor air quality, acoustic comfort, and wellbeing metrics remain strong.</p>
+                <div class="col-md-3 col-6">
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="stat-number">3</h3>
+                        <p class="stat-label">Core Pillars</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="data-metric h-100">
-                    <span class="metric-label text-uppercase text-primary">Intelligent Building</span>
-                    <h3 class="metric-value">54 / 60</h3>
-                    <p class="metric-description">Digital infrastructure and smart services position the project for future demands.</p>
+                <div class="col-md-3 col-6">
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h3 class="stat-number">100%</h3>
+                        <p class="stat-label">Automated Scoring</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="py-5">
-    <div class="container">
-        <div class="section-heading mb-4">
-            <span class="section-kicker">Guided Workflow</span>
-            <h2 class="fw-bold">Follow the automated journey—or take manual control when needed</h2>
-            <p class="text-muted mb-0">Use the icon bar to open files, add new projects, and export reports at any stage.</p>
-        </div>
-        <div class="row g-4 align-items-stretch">
-            <div class="col-lg-4">
-                <div class="instruction-card h-100">
-                    <h5 class="mb-3 text-primary text-uppercase letter-spaced-sm">Icon Bar Essentials</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li><strong>New / Open:</strong> Start a fresh evaluation or continue an existing study.</li>
-                        <li><strong>Save / Save As:</strong> Secure iterations for comparison.</li>
-                        <li><strong>Print / Export:</strong> Share progress with stakeholders instantly.</li>
-                        <li><strong>Info:</strong> Access program notes, definitions, and scoring rubrics.</li>
-                    </ul>
-                </div>
+    <!-- Features Section -->
+    <section class="section-spacing bg-light-custom fade-in">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Key Features</h2>
+                <p class="section-subtitle">Comprehensive building assessment across multiple dimensions</p>
             </div>
-            <div class="col-lg-8">
-                <div class="row g-3 tool-tabs">
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="tool-tab active">
-                            <span class="tool-title">Project</span>
-                            <p class="tool-description">Capture project metadata, stakeholders, and baseline data.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="tool-tab">
-                            <span class="tool-title">Type of Building</span>
-                            <p class="tool-description">Residential, educational, institutional, industrial, and more.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="tool-tab">
-                            <span class="tool-title">Assessment Groups</span>
-                            <p class="tool-description">Environment, mobility, innovation, water, safety, community quality.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="tool-tab">
-                            <span class="tool-title">Group Items</span>
-                            <p class="tool-description">Detailed indicators mapped to essential or optional scoring.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="tool-tab">
-                            <span class="tool-title">Item Classification</span>
-                            <p class="tool-description">Tag each item as Sustainable, Healthy, or Intelligent.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="tool-tab">
-                            <span class="tool-title">Available Points</span>
-                            <p class="tool-description">Monitor allocated vs. earned points to maintain balance.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="step-card h-100">
-                    <h5 class="text-uppercase text-primary letter-spaced-sm mb-3">1. Prepare</h5>
-                    <p class="text-muted mb-0">Review “Type of Building” categories and gather documentation for site, energy, mobility, and materials data.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card-v2 text-center">
+                        <div class="feature-icon-v2">
+                            <i class="bi bi-recycle"></i>
+                        </div>
+                        <h4 class="mb-3 fw-bold">Sustainable</h4>
+                        <p class="text-muted mb-0">
+                            Evaluate environmental impact, energy efficiency, and resource management
+                            for eco-friendly buildings that minimize their carbon footprint.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="step-card h-100">
-                    <h5 class="text-uppercase text-primary letter-spaced-sm mb-3">2. Assess</h5>
-                    <p class="text-muted mb-0">Complete group items, flag essential requirements, and attach supporting evidence where relevant.</p>
+
+                <div class="col-md-4">
+                    <div class="card feature-card-v2 text-center">
+                        <div class="feature-icon-v2">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <h4 class="mb-3 fw-bold">Healthy</h4>
+                        <p class="text-muted mb-0">
+                            Assess air quality, water quality, acoustic comfort, and nourishment
+                            to ensure optimal occupant wellbeing and productivity.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="step-card h-100">
-                    <h5 class="text-uppercase text-primary letter-spaced-sm mb-3">3. Communicate</h5>
-                    <p class="text-muted mb-0">Generate printable dashboards to share with the supervision board and project stakeholders.</p>
+
+                <div class="col-md-4">
+                    <div class="card feature-card-v2 text-center">
+                        <div class="feature-icon-v2">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h4 class="mb-3 fw-bold">Intelligent</h4>
+                        <p class="text-muted mb-0">
+                            Analyze smart technologies, automation, security systems, and innovative
+                            solutions for next-generation intelligent buildings.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-@endsection
+    </section>
 
-@section('js')
+    <!-- How It Works Section -->
+    <section class="section-spacing fade-in">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Simple steps to evaluate your building project</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="card step-card text-center">
+                        <div class="step-number">1</div>
+                        <h5 class="mb-3 fw-bold">Start Assessment</h5>
+                        <p class="text-muted mb-0 small">
+                            Create a new project and select your building type.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card step-card text-center">
+                        <div class="step-number">2</div>
+                        <h5 class="mb-3 fw-bold">Complete Groups</h5>
+                        <p class="text-muted mb-0 small">
+                            Evaluate your building across 17 assessment groups.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card step-card text-center">
+                        <div class="step-number">3</div>
+                        <h5 class="mb-3 fw-bold">Get Scores</h5>
+                        <p class="text-muted mb-0 small">
+                            View automated calculations of Available Points (AP) and Earned Points (EP).
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card step-card text-center">
+                        <div class="step-number">4</div>
+                        <h5 class="mb-3 fw-bold">View Reports</h5>
+                        <p class="text-muted mb-0 small">
+                            Generate comprehensive reports and insights for stakeholders.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section-spacing bg-light-custom fade-in">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Why Choose IAM-SHIMB</h2>
+                <p class="section-subtitle">Comprehensive benefits for your building projects</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card benefit-card text-center">
+                        <div class="benefit-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                       <h5 class="mb-3 fw-bold">Comprehensive Coverage</h5>
+                        <p class="text-muted mb-0">
+                            Evaluate all aspects of your building from sustainability and health to intelligent systems in one integrated platform.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card benefit-card text-center">
+                        <div class="benefit-icon">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <h5 class="mb-3 fw-bold">Automated Calculations</h5>
+                        <p class="text-muted mb-0">
+                            Real-time scoring system automatically calculates AP and EP, saving time and ensuring accuracy.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card benefit-card text-center">
+                        <div class="benefit-icon">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h5 class="mb-3 fw-bold">Comprehensive Reports</h5>
+                        <p class="text-muted mb-0">
+                            Generate detailed reports and visualizations to present findings to stakeholders and
+                            decision-makers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-spacing fade-in">
+        <div class="container">
+            <div class="cta-section text-center">
+                <h2 class="section-title mb-4">Ready to Assess Your Building?</h2>
+                <p class="lead mb-4">Start evaluating your project with our comprehensive assessment model</p>
+                <a class="btn btn-light btn-lg" style="border-radius: 50px; padding: 14px 45px; font-weight: 600;">
+                    <i class="bi bi-arrow-right-circle me-2"></i>Get Started Now
+                </a>
+            </div>
+        </div>
+    </section>
 @endsection
