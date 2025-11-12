@@ -1,0 +1,347 @@
+/* Navbar */
+.navbar-brand {
+    color: #0070c0;
+}
+
+.navbar-brand:hover {
+    color: #0070c0;
+}
+
+.navbar .active {
+    background-color: #0070c0;
+    color: white !important;
+    border-radius: 5px;
+}
+
+.nav-item:hover {
+    background-color: #0070c0;
+    border-radius: 5px;
+}
+
+.nav-item:hover .nav-link {
+    color: white !important;
+}
+
+/* Navbar */
+
+/* Shared */
+body {
+    background-color: #ffffff;
+    color: #243648;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.letter-spaced {
+    letter-spacing: 0.3rem;
+}
+
+.letter-spaced-sm {
+    letter-spacing: 0.15rem;
+}
+
+.section-heading h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.section-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: #0070c0;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.cta-btn {
+    min-width: 150px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 0.85rem 1.5rem;
+}
+
+.cta-btn-outline {
+    border-width: 2px;
+}
+
+.shadow-soft {
+    box-shadow: 0 18px 45px rgba(0, 63, 125, 0.12);
+}
+
+/* Shared */
+
+/* Index */
+.hero-section {
+    background: radial-gradient(circle at top left, rgba(0, 142, 204, 0.18), transparent 55%), radial-gradient(circle at bottom right, rgba(0, 80, 157, 0.14), transparent 52%), #f7fbff;
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    padding: 4.5rem 0 3.5rem;
+}
+
+.hero-title {
+    font-size: clamp(2.75rem, 6vw, 4rem);
+    font-weight: 800;
+    letter-spacing: 0.12rem;
+    color: #003d79;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #1d4063;
+    max-width: 38rem;
+}
+
+.hero-badge .badge {
+    letter-spacing: 0.12rem;
+}
+
+.floating-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 28px 60px rgba(0, 45, 95, 0.16);
+    background: #ffffff;
+}
+
+.floating-card img {
+    max-width: 240px;
+}
+
+.professors-card {
+    border-radius: 26px;
+    border: none;
+    background: linear-gradient(135deg, #003d79, #005baa);
+    color: #ffffff;
+    box-shadow: 0 25px 45px rgba(0, 32, 64, 0.28);
+}
+
+.professors-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.professors-card li+li {
+    margin-top: 0.75rem;
+}
+
+.data-metric {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.75rem;
+    box-shadow: 0 18px 38px rgba(0, 50, 110, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.data-metric:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 48px rgba(0, 45, 95, 0.18);
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.18rem;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #003d79;
+    margin-bottom: 0.25rem;
+}
+
+.metric-description {
+    color: #617795;
+    font-size: 0.95rem;
+}
+
+.instruction-card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 2rem;
+    box-shadow: 0 25px 55px rgba(0, 55, 115, 0.12);
+}
+
+.instruction-card ul li {
+    margin-bottom: 0.9rem;
+    color: #4b627d;
+}
+
+.tool-tabs .tool-tab {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.75rem;
+    text-align: left;
+    height: 100%;
+    box-shadow: 0 18px 38px rgba(0, 50, 110, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tool-tabs .tool-tab:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 48px rgba(0, 45, 95, 0.18);
+}
+
+.tool-tabs .tool-tab.active {
+    border: 2px solid rgba(0, 112, 192, 0.35);
+}
+
+.tool-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18rem;
+    color: #003d79;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.tool-description {
+    margin: 0;
+    color: #617795;
+}
+
+.step-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 18px 40px rgba(0, 55, 115, 0.12);
+    transition: transform 0.25s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Index */
+
+/* About */
+.sub-hero {
+    background: linear-gradient(135deg, rgba(0, 80, 157, 0.08), rgba(0, 166, 214, 0.08));
+}
+
+.team-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 28px 60px rgba(0, 45, 95, 0.16);
+}
+
+.team-card ul li strong {
+    color: #003d79;
+}
+
+.value-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.75rem;
+    box-shadow: 0 18px 38px rgba(0, 55, 115, 0.12);
+    transition: transform 0.25s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-4px);
+}
+
+.list-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.75rem;
+    box-shadow: 0 18px 38px rgba(0, 55, 115, 0.12);
+}
+
+.list-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #4b627d;
+}
+
+.list-card ul li+li {
+    margin-top: 0.75rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, rgba(0, 112, 192, 0.25), rgba(0, 112, 192, 0));
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    border: 4px solid #0070c0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(0, 112, 192, 0.12);
+}
+
+.timeline-date {
+    font-weight: 700;
+    color: #003d79;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h5 {
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.timeline-content p {
+    margin: 0;
+    color: #617795;
+}
+
+/* About */
+
+@media (max-width: 991.98px) {
+    .hero-section {
+        min-height: auto;
+        padding: 3.5rem 0;
+        text-align: center;
+    }
+
+    .hero-section .floating-card,
+    .hero-section .professors-card {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .instruction-card {
+        text-align: center;
+    }
+
+    .tool-tabs .tool-tab {
+        text-align: center;
+    }
+}

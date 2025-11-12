@@ -18,6 +18,3 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // API Tester Route
-Route::get('/api-tester', function () {
-    return view('api-tester');
-})->name('api-tester');

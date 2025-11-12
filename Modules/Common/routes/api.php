@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Common\App\Http\Controllers\Api\CommonController;
 
 /*
     |--------------------------------------------------------------------------
@@ -13,6 +12,3 @@ use Modules\Common\App\Http\Controllers\Api\CommonController;
     | is assigned the "api" middleware group. Enjoy building your API!
     |
 */
-
-
-Route::post('contact', [CommonController::class, 'contact']);
