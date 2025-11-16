@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-custom-navbar" href="#">
+                    <a class="btn btn-custom-navbar" href="{{ route('mega-buildings.index') }}">
                         <i class="bi bi-play-circle me-1"></i>Start Assessment
                     </a>
                 </li>

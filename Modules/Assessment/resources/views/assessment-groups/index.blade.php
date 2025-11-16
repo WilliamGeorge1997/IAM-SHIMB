@@ -1,0 +1,187 @@
+@extends('common::layouts.dashboard.master')
+
+@section('css')
+    <style>
+        .percentage-badge {
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.375rem;
+            display: inline-block;
+            margin: 0.1rem;
+        }
+    </style>
+@endsection
+
+@section('content')
+    <div class="container-fluid py-2">
+        <!-- Dashboard Header -->
+        <div class="bg-gradient-primary text-white rounded-3 p-2 mb-2 shadow"
+            style="background: linear-gradient(135deg, #1976d2 0%, #64b5f6 100%);">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                <div>
+                    <h1 class="h6 fw-semibold mb-0">
+                        <i class="bi bi-clipboard-check me-1" style="font-size: 0.9rem;"></i>
+                        Select Assessment Group
+                    </h1>
+                    <p class="mb-0 opacity-75" style="font-size: 0.75rem;">Choose an assessment group to continue.</p>
+                </div>
+                <div class="mt-2 mt-md-0 d-flex gap-2">
+                    <a href="{{ route('index') }}"
+                        class="btn btn-light btn-sm rounded-pill d-flex align-items-center"
+                        style="font-size: 0.8rem; padding: 0.25rem 0.75rem;">
+                        <i class="bi bi-house-door me-1"></i>
+                        Home
+                    </a>
+                    <a href="{{ route('building-types.index', $megaBuilding) }}" class="btn btn-light btn-sm rounded-pill d-flex align-items-center"
+                        style="font-size: 0.8rem; padding: 0.25rem 0.75rem;">
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Back to Building Types
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Context Information Bar -->
+        <div class="mb-2">
+            <div
+                class="d-flex flex-column flex-md-row align-items-md-center gap-2 p-2 bg-white rounded-2 shadow-sm border border-light">
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <a href="{{ route('mega-buildings.index') }}" class="text-decoration-none context-item-hover">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="bg-primary bg-opacity-10 rounded-circle p-1">
+                                <i class="bi bi-building text-primary" style="font-size: 0.85rem;"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted fw-semibold text-uppercase"
+                                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Mega Building</div>
+                                <div class="fw-bold text-dark" style="font-size: 0.85rem;">{{ $megaBuilding->name }}</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="vr d-none d-md-block" style="height: 30px;"></div>
+                    <a href="{{ route('building-types.index', ['mega_building' => $megaBuilding->id]) }}" class="text-decoration-none context-item-hover">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="bg-info bg-opacity-10 rounded-circle p-1">
+                                <i class="bi bi-building-check text-info" style="font-size: 0.85rem;"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted fw-semibold text-uppercase"
+                                    style="font-size: 0.65rem; letter-spacing: 0.5px;">Building Type</div>
+                                <div class="fw-bold text-dark" style="font-size: 0.85rem;">{{ $buildingType->name }}</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assessment Groups Section -->
+        <div class="card shadow rounded-3 border-0 mb-2 py-2 px-2">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            <div class="card-header bg-transparent border-0 pb-0">
+                <h2 class="h6 mb-0 fw-semibold d-flex align-items-center">
+                    <i class="bi bi-list-check text-primary me-1" style="font-size: 0.9rem;"></i>
+                    Available Assessment Groups
+                </h2>
+            </div>
+            <div class="card-body p-0 container my-2">
+                @if ($assessmentGroups->isNotEmpty())
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0 table-borderless table-hover" style="font-size: 0.875rem;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="fw-semibold text-secondary" style="font-size: 0.8rem;">No.</th>
+                                    <th class="fw-semibold text-secondary" style="font-size: 0.8rem;">Assessment Group</th>
+                                    <th class="fw-semibold text-secondary" style="font-size: 0.8rem;">Percentages</th>
+                                    <th class="fw-semibold text-end text-secondary" style="font-size: 0.8rem;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($assessmentGroups as $assessmentGroup)
+                                    @php
+                                        $percentages = $groupPercentages[$assessmentGroup->id] ?? [];
+                                    @endphp
+                                    <tr class="border-bottom"
+                                        onclick="window.location.href='{{ route('items.index', ['assessment_group' => $assessmentGroup->id, 'building_type' => $buildingType->id, 'mega_building' => $megaBuilding->id]) }}'"
+                                        style="cursor: pointer;" onmouseover="this.style.backgroundColor='#f8f9fa'"
+                                        onmouseout="this.style.backgroundColor='transparent'">
+                                        <td>
+                                            <span class="fw-semibold"
+                                                style="font-size: 0.85rem;">{{ $loop->iteration }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="fw-semibold"
+                                                style="font-size: 0.85rem;">{{ $assessmentGroup->name }}</span>
+                                        </td>
+                                        <td>
+                                            @if (!empty($percentages))
+                                                <div class="d-flex flex-wrap gap-1 align-items-center">
+                                                    @if (isset($percentages['Sustainable']))
+                                                        <span class="percentage-badge classification-sustainable">
+                                                            Sustainable: {{ $percentages['Sustainable'] }}%
+                                                        </span>
+                                                    @endif
+                                                    @if (isset($percentages['Healthy']))
+                                                        <span class="percentage-badge classification-healthy">
+                                                            Healthy: {{ $percentages['Healthy'] }}%
+                                                        </span>
+                                                    @endif
+                                                    @if (isset($percentages['Intelligent']))
+                                                        <span class="percentage-badge classification-intelligent">
+                                                            Intelligent: {{ $percentages['Intelligent'] }}%
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <span class="text-muted" style="font-size: 0.8rem;">-</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-end">
+                                            <span
+                                                class="btn btn-primary btn-sm rounded-pill px-3 d-inline-flex align-items-center gap-1"
+                                                style="font-size: 0.8rem; padding: 0.2rem 0.6rem;">
+                                                <i class="bi bi-check-circle" style="font-size: 0.85rem;"></i>
+                                                Select
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="text-center py-3">
+                        <i class="bi bi-clipboard-x text-muted opacity-50 mb-2" style="font-size: 2.5rem;"></i>
+                        <h5 class="fw-semibold mb-1" style="font-size: 1rem;">No Assessment Groups Available</h5>
+                        <p class="text-muted mb-2" style="font-size: 0.85rem;">Please contact administrator to add
+                            assessment groups.</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+@endsection
+@section('js')
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successAlert = document.querySelector('.alert-success');
+            if (successAlert) {
+                setTimeout(function() {
+                    successAlert.classList.remove('show');
+                    successAlert.classList.add('fade');
+                    setTimeout(function() {
+                        if (successAlert.parentNode) {
+                            successAlert.parentNode.removeChild(successAlert);
+                        }
+                    }, 500);
+                }, 3000);
+            }
+        });
+</script>
+@endsection

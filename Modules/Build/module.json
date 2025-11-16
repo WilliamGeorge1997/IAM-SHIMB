@@ -1,0 +1,11 @@
+{
+    "name": "Build",
+    "alias": "build",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Build\\App\\Providers\\BuildServiceProvider"
+    ],
+    "files": []
+}

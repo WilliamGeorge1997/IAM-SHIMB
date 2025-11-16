@@ -1,3 +1,5 @@
 {
-    "Common": true
+    "Common": true,
+    "Build": true,
+    "Assessment": true
 }
