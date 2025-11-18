@@ -479,6 +479,7 @@
             });
 
             // Healthy Gauge
+            // Healthy Gauge
             const healthyGauge = new JustGage({
                 id: "gauge-healthy",
                 value: {{ $healthyPercentage }},
@@ -490,25 +491,76 @@
                 pointer: true,
                 counter: true,
                 decimals: 2,
-                gaugeColor: "#ffffff",
-                levelColors: ["#4caf50"],
-                customSectors: [{
-                    color: "#ff0000",
-                    lo: 0,
-                    hi: 33
-                }, {
-                    color: "#ffa500",
-                    lo: 33,
-                    hi: 66
-                }, {
-                    color: "#4caf50",
-                    lo: 66,
-                    hi: 100
-                }],
+                gaugeColor: "#f5f8f4",
+                levelColors: ["#e5f7e5"], // Single color - we'll override with gradient
                 textRenderer: function(value) {
                     return value.toFixed(2) + "%";
                 }
             });
+
+            // Apply gradient to the gauge arc after creation
+            setTimeout(function() {
+                const gaugeElement = document.getElementById('gauge-healthy');
+                if (gaugeElement) {
+                    const svg = gaugeElement.querySelector('svg');
+                    if (svg) {
+                        // Create SVG gradient definition
+                        const defs = svg.querySelector('defs') || document.createElementNS(
+                            'http://www.w3.org/2000/svg', 'defs');
+                        if (!svg.querySelector('defs')) {
+                            svg.insertBefore(defs, svg.firstChild);
+                        }
+
+                        // Remove existing gradient if any
+                        const existingGradient = defs.querySelector('#healthyGradient');
+                        if (existingGradient) {
+                            existingGradient.remove();
+                        }
+
+                        // Create linear gradient
+                        const gradient = document.createElementNS('http://www.w3.org/2000/svg',
+                            'linearGradient');
+                        gradient.setAttribute('id', 'healthyGradient');
+                        gradient.setAttribute('x1', '0%');
+                        gradient.setAttribute('y1', '0%');
+                        gradient.setAttribute('x2', '100%');
+                        gradient.setAttribute('y2', '0%');
+
+                        // Add color stops: light green to dark green
+                        // Add color stops: darker green to dark green
+                        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop1.setAttribute('offset', '0%');
+                        stop1.setAttribute('stop-color', '#81c784'); // Medium-light green (darker start)
+                        stop1.setAttribute('stop-opacity', '1');
+
+                        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop2.setAttribute('offset', '50%');
+                        stop2.setAttribute('stop-color', '#66bb6a'); // Medium green
+                        stop2.setAttribute('stop-opacity', '1');
+
+                        const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop3.setAttribute('offset', '100%');
+                        stop3.setAttribute('stop-color', '#1b5e20'); // Dark green
+                        stop3.setAttribute('stop-opacity', '1');
+
+                        gradient.appendChild(stop1);
+                        gradient.appendChild(stop2);
+                        gradient.appendChild(stop3);
+                        defs.appendChild(gradient);
+
+                        // Find the gauge arc path and apply gradient
+                        const paths = svg.querySelectorAll('path');
+                        paths.forEach(function(path) {
+                            const fill = path.getAttribute('fill');
+                            // Apply gradient to the main gauge arc (usually the colored one)
+                            if (fill && fill !== '#ffffff' && fill !== '#f5f8f4' && fill !==
+                                'none') {
+                                path.setAttribute('fill', 'url(#healthyGradient)');
+                            }
+                        });
+                    }
+                }
+            }, 100);
         });
 
         function handleToggleChange(itemId, isEssential, availablePoints) {
