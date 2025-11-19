@@ -64,11 +64,11 @@ class AssessmentGroupService
         $result = [];
 
         foreach ($classifications as $classification) {
-            // Get all items for this classification
+
             $items = Item::where('classification', $classification)->get();
 
             if ($buildingType) {
-                // Calculate for specific building type
+
                 $itemIds = $items->pluck('id')->toArray();
                 $earnedPoints = ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
                     ->where('building_type_id', $buildingType->id)
@@ -76,19 +76,19 @@ class AssessmentGroupService
                     ->get()
                     ->keyBy('item_id');
             } else {
-                // Calculate for mega building (aggregate across all building types)
+
                 $itemIds = $items->pluck('id')->toArray();
                 $earnedPoints = ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
                     ->whereIn('item_id', $itemIds)
                     ->get()
                     ->groupBy('item_id')
                     ->map(function ($group) {
-                        // Sum earned points across all building types for this item
+
                         return (object) ['earned_points' => $group->sum('earned_points')];
                     });
             }
 
-            // Calculate Essential Items (AP)
+
             $essentialItems = $items->where('type', 'Essential');
             $essentialItemIds = $essentialItems->pluck('id')->toArray();
 
@@ -103,10 +103,10 @@ class AssessmentGroupService
                     ->get();
             }
 
-            // Count essential items that have earned points (meaning they were checked/earned)
+
             $ap = $earnedEssentialPoints->count();
 
-            // Calculate Optional Items (EP and Total)
+
             $optionalItems = $items->where('type', 'Optional');
             $totalAvailable = 0;
             $totalEarned = 0;
@@ -119,17 +119,67 @@ class AssessmentGroupService
                 }
             }
 
-            // Calculate percentage (EP / Total Available) * 100
+
             $percentage = $totalAvailable > 0 ? round(($totalEarned / $totalAvailable) * 100, 2) : 0;
 
             $result[$classification] = [
-                'ap' => $ap, // Essential Items count
-                'ep' => round($totalEarned, 2), // Earned Points
-                'total' => round($totalAvailable, 2), // Total Available Points
-                'percentage' => $percentage, // Percentage
+                'ap' => $ap,
+                'ep' => round($totalEarned, 2),
+                'total' => round($totalAvailable, 2),
+                'percentage' => $percentage,
             ];
         }
 
         return $result;
     }
+
+   public function getBuildingTypeAveragePercentage(MegaBuilding $megaBuilding, BuildingType $buildingType): float
+{
+    // Get all assessment groups
+    $assessmentGroups = AssessmentGroup::all();
+
+    if ($assessmentGroups->isEmpty()) {
+        return 0.0;
+    }
+
+    $totalAvailable = 0.0;
+    $totalEarned = 0.0;
+
+    // Sum earned and available points across all assessment groups for this building type
+    foreach ($assessmentGroups as $group) {
+        $optionalItems = Item::where('assessment_group_id', $group->id)
+            ->where('type', 'Optional')
+            ->get();
+
+        if ($optionalItems->isEmpty()) {
+            continue;
+        }
+
+        $itemIds = $optionalItems->pluck('id');
+        $earnedPoints = ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
+            ->where('building_type_id', $buildingType->id)
+            ->whereIn('item_id', $itemIds)
+            ->get()
+            ->keyBy('item_id');
+
+        // Sum available points for this group
+        $groupAvailable = $optionalItems->sum(fn(Item $item): float => (float) $item->available_points);
+
+        // Sum earned points for this group
+        $groupEarned = $optionalItems->sum(function (Item $item) use ($earnedPoints): float {
+            $earnedPoint = $earnedPoints->get($item->id);
+            return $earnedPoint ? (float) $earnedPoint->earned_points : 0.0;
+        });
+
+        $totalAvailable += $groupAvailable;
+        $totalEarned += $groupEarned;
+    }
+
+    if ($totalAvailable <= 0) {
+        return 0.0;
+    }
+
+    // Calculate percentage: Total EP / Total AP * 100%
+    return round(($totalEarned / $totalAvailable) * 100, 2);
+}
 }

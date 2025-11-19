@@ -120,58 +120,79 @@
             <div class="card-body">
                 <!-- Gauges Container -->
                 <div class="d-flex flex-column flex-lg-row gap-3">
-                    <!-- First Flex: Mega Building Gauge -->
+                    <!-- Left Column: Mega Building Gauge -->
                     <div class="d-flex flex-column flex-lg-3">
                         <h6 class="fw-semibold mb-2 text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">
                             <i class="bi bi-info-circle me-1"></i>For Full Mega Building
                         </h6>
-                        <div class="text-center p-3 bg-light rounded-3 h-100">
+                        <div
+                            class="text-center p-3 bg-light rounded-3 h-100 d-flex align-items-center justify-content-center flex-column">
                             <h6 class="fw-semibold mb-3" style="font-size: 0.85rem; color: #6c757d;">
                                 Mega Building
                             </h6>
-                            <div id="gauge-mega-building" style="width: 100%; height: 200px;"></div>
+                            <div id="gauge-mega-building" class="d-flex align-items-center justify-content-center mx-auto"
+                                style="max-width: 300px; width: 100%; height: 200px;"></div>
                         </div>
-                        <!-- Vertical Divider -->
                     </div>
 
-                    <!-- Second Flex: Other 3 Gauges -->
-                    <div class="d-flex flex-column flex-lg-9">
-                        <h6 class="fw-semibold mb-2 text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">
-                            <i class="bi bi-info-circle me-1"></i>For This Assessment Group: <span
-                                class="fw-semibold">{{ $assessmentGroup->name }}</span>
-                        </h6>
-                        <div class="d-flex flex-column flex-md-row gap-3">
-                            <!-- Sustainable Gauge -->
-                            <div class="flex-fill position-relative">
-                                <div class="text-center p-3 bg-light rounded-3 h-100">
-                                    <h6 class="fw-semibold mb-3 classification-sustainable" style="font-size: 0.85rem;">
-                                        Sustainable
-                                    </h6>
-                                    <div id="gauge-sustainable" style="width: 100%; height: 200px;"></div>
-                                </div>
-                                <!-- Vertical Divider -->
-                                <div class="vr position-absolute top-0 end-0 d-none d-md-block"
-                                    style="height: 100%; width: 1px; background-color: #dee2e6;"></div>
+                    <!-- Right Column: Building Type on Top, 3 Gauges Below -->
+                    <div class="d-flex flex-column flex-lg-9 gap-3">
+                        <!-- Top Row: Building Type Gauge -->
+                        <div>
+                            <h6 class="fw-semibold mb-2 text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                                <i class="bi bi-info-circle me-1"></i>For This Building Type: <span
+                                    class="fw-semibold">{{ $buildingType->name }}</span>
+                            </h6>
+                            <div
+                                class="text-center p-3 bg-light rounded-3 d-flex align-items-center justify-content-center flex-column">
+                                <h6 class="fw-semibold mb-3" style="font-size: 0.85rem; color: #6c757d;">
+                                    Building Type Avg
+                                </h6>
+                                <div id="gauge-building-type"
+                                    class="d-flex justify-content-center align-items-center mx-auto"
+                                    style="max-width: 300px; width: 100%; height: 200px;"></div>
                             </div>
-                            <!-- Intelligent Gauge -->
-                            <div class="flex-fill position-relative">
-                                <div class="text-center p-3 bg-light rounded-3 h-100">
-                                    <h6 class="fw-semibold mb-3 classification-intelligent" style="font-size: 0.85rem;">
-                                        Intelligent
-                                    </h6>
-                                    <div id="gauge-intelligent" style="width: 100%; height: 200px;"></div>
+                        </div>
+
+                        <!-- Bottom Row: 3 Classification Gauges -->
+                        <div>
+                            <h6 class="fw-semibold mb-2 text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                                <i class="bi bi-info-circle me-1"></i>For This Assessment Group: <span
+                                    class="fw-semibold">{{ $assessmentGroup->name }}</span>
+                            </h6>
+                            <div class="d-flex flex-column flex-md-row gap-3">
+                                <!-- Sustainable Gauge -->
+                                <div class="flex-fill position-relative">
+                                    <div class="text-center p-3 bg-light rounded-3 h-100">
+                                        <h6 class="fw-semibold mb-3 classification-sustainable" style="font-size: 0.85rem;">
+                                            Sustainable
+                                        </h6>
+                                        <div id="gauge-sustainable" class="d-flex justify-content-center align-items-center mx-auto" style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                    </div>
+                                    <!-- Vertical Divider -->
+                                    <div class="vr position-absolute top-0 end-0 d-none d-md-block"
+                                        style="height: 100%; width: 1px; background-color: #dee2e6;"></div>
                                 </div>
-                                <!-- Vertical Divider -->
-                                <div class="vr position-absolute top-0 end-0 d-none d-md-block"
-                                    style="height: 100%; width: 1px; background-color: #dee2e6;"></div>
-                            </div>
-                            <!-- Healthy Gauge -->
-                            <div class="flex-fill">
-                                <div class="text-center p-3 bg-light rounded-3 h-100">
-                                    <h6 class="fw-semibold mb-3 classification-healthy" style="font-size: 0.85rem;">
-                                        Healthy
-                                    </h6>
-                                    <div id="gauge-healthy" style="width: 100%; height: 200px;"></div>
+                                <!-- Intelligent Gauge -->
+                                <div class="flex-fill position-relative">
+                                    <div class="text-center p-3 bg-light rounded-3 h-100">
+                                        <h6 class="fw-semibold mb-3 classification-intelligent" style="font-size: 0.85rem;">
+                                            Intelligent
+                                        </h6>
+                                        <div id="gauge-intelligent" class="d-flex justify-content-center align-items-center mx-auto" style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                    </div>
+                                    <!-- Vertical Divider -->
+                                    <div class="vr position-absolute top-0 end-0 d-none d-md-block"
+                                        style="height: 100%; width: 1px; background-color: #dee2e6;"></div>
+                                </div>
+                                <!-- Healthy Gauge -->
+                                <div class="flex-fill">
+                                    <div class="text-center p-3 bg-light rounded-3 h-100">
+                                        <h6 class="fw-semibold mb-3 classification-healthy" style="font-size: 0.85rem;">
+                                            Healthy
+                                        </h6>
+                                        <div id="gauge-healthy" class="d-flex justify-content-center align-items-center mx-auto" style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -396,23 +417,32 @@
                 pointer: true,
                 counter: true,
                 decimals: 2,
-                customSectors: [{
-                    color: "#ff0000",
-                    lo: 0,
-                    hi: 33
-                }, {
-                    color: "#ffa500",
-                    lo: 33,
-                    hi: 66
-                }, {
-                    color: "#4caf50",
-                    lo: 66,
-                    hi: 100
-                }],
+                gaugeColor: "#fff4f0",
+                levelColors: ["#ffe0d6"], // Single color - we'll override with gradient
                 textRenderer: function(value) {
                     return value.toFixed(2) + "%";
                 }
             });
+
+
+            const buildingTypeGauge = new JustGage({
+                id: "gauge-building-type",
+                value: {{ $buildingTypeAveragePercentage }},
+                min: 0,
+                max: 100,
+                title: "Building Type Avg",
+                label: "%",
+                gaugeWidthScale: 0.6,
+                pointer: true,
+                counter: true,
+                decimals: 2,
+                gaugeColor: "#f5f0ff",
+                levelColors: ["#e0d7ff"],
+                textRenderer(value) {
+                    return value.toFixed(2) + "%";
+                }
+            });
+
 
             // Sustainable Gauge
             const sustainableGauge = new JustGage({
@@ -426,21 +456,8 @@
                 pointer: true,
                 counter: true,
                 decimals: 2,
-                gaugeColor: "#ffffff",
-                levelColors: ["#1976d2"],
-                customSectors: [{
-                    color: "#ff0000",
-                    lo: 0,
-                    hi: 33
-                }, {
-                    color: "#ffa500",
-                    lo: 33,
-                    hi: 66
-                }, {
-                    color: "#1976d2",
-                    lo: 66,
-                    hi: 100
-                }],
+                gaugeColor: "#f3f7fc",
+                levelColors: ["#e3f2fd"], // Single color - we'll override with gradient
                 textRenderer: function(value) {
                     return value.toFixed(2) + "%";
                 }
@@ -458,27 +475,13 @@
                 pointer: true,
                 counter: true,
                 decimals: 2,
-                gaugeColor: "#ffffff",
-                levelColors: ["#ff9800"],
-                customSectors: [{
-                    color: "#ff0000",
-                    lo: 0,
-                    hi: 33
-                }, {
-                    color: "#ffa500",
-                    lo: 33,
-                    hi: 66
-                }, {
-                    color: "#ff9800",
-                    lo: 66,
-                    hi: 100
-                }],
+                gaugeColor: "#fff8f0",
+                levelColors: ["#ffe0b2"], // Single color - we'll override with gradient
                 textRenderer: function(value) {
                     return value.toFixed(2) + "%";
                 }
             });
 
-            // Healthy Gauge
             // Healthy Gauge
             const healthyGauge = new JustGage({
                 id: "gauge-healthy",
@@ -497,6 +500,175 @@
                     return value.toFixed(2) + "%";
                 }
             });
+
+            // Apply gradient to Sustainable gauge arc after creation
+            setTimeout(function() {
+                const gaugeElement = document.getElementById('gauge-sustainable');
+                if (gaugeElement) {
+                    const svg = gaugeElement.querySelector('svg');
+                    if (svg) {
+                        // Create SVG gradient definition
+                        const defs = svg.querySelector('defs') || document.createElementNS(
+                            'http://www.w3.org/2000/svg', 'defs');
+                        if (!svg.querySelector('defs')) {
+                            svg.insertBefore(defs, svg.firstChild);
+                        }
+
+                        // Remove existing gradient if any
+                        const existingGradient = defs.querySelector('#sustainableGradient');
+                        if (existingGradient) {
+                            existingGradient.remove();
+                        }
+
+                        // Create linear gradient
+                        const gradient = document.createElementNS('http://www.w3.org/2000/svg',
+                            'linearGradient');
+                        gradient.setAttribute('id', 'sustainableGradient');
+                        gradient.setAttribute('x1', '0%');
+                        gradient.setAttribute('y1', '0%');
+                        gradient.setAttribute('x2', '100%');
+                        gradient.setAttribute('y2', '0%');
+
+                        // Add color stops: light blue to dark blue
+                        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop1.setAttribute('offset', '0%');
+                        stop1.setAttribute('stop-color', '#90caf9'); // Light blue
+                        stop1.setAttribute('stop-opacity', '1');
+
+                        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop2.setAttribute('offset', '50%');
+                        stop2.setAttribute('stop-color', '#64b5f6'); // Medium blue
+                        stop2.setAttribute('stop-opacity', '1');
+
+                        const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop3.setAttribute('offset', '100%');
+                        stop3.setAttribute('stop-color', '#1565c0'); // Dark blue
+                        stop3.setAttribute('stop-opacity', '1');
+
+                        gradient.appendChild(stop1);
+                        gradient.appendChild(stop2);
+                        gradient.appendChild(stop3);
+                        defs.appendChild(gradient);
+
+                        // Find the gauge arc path and apply gradient
+                        const paths = svg.querySelectorAll('path');
+                        paths.forEach(function(path) {
+                            const fill = path.getAttribute('fill');
+                            // Apply gradient to the main gauge arc (usually the colored one)
+                            if (fill && fill !== '#ffffff' && fill !== '#f3f7fc' && fill !==
+                                'none') {
+                                path.setAttribute('fill', 'url(#sustainableGradient)');
+                            }
+                        });
+                    }
+                }
+            }, 100);
+            // Gradient styling (after existing gradient blocks)
+            setTimeout(function() {
+                const gaugeElement = document.getElementById('gauge-building-type');
+                if (!gaugeElement) {
+                    return;
+                }
+
+                const svg = gaugeElement.querySelector('svg');
+                if (!svg) {
+                    return;
+                }
+
+                const defs = svg.querySelector('defs') ?? svg.insertBefore(document.createElementNS(
+                    'http://www.w3.org/2000/svg', 'defs'), svg.firstChild);
+                defs.querySelector('#buildingTypeGradient')?.remove();
+
+                const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+                gradient.setAttribute('id', 'buildingTypeGradient');
+                gradient.setAttribute('x1', '0%');
+                gradient.setAttribute('y1', '0%');
+                gradient.setAttribute('x2', '100%');
+                gradient.setAttribute('y2', '0%');
+
+                [
+                    ['0%', '#d1c4e9'],
+                    ['50%', '#b39ddb'],
+                    ['100%', '#673ab7'],
+                ].forEach(([offset, color]) => {
+                    const stop = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                    stop.setAttribute('offset', offset);
+                    stop.setAttribute('stop-color', color);
+                    stop.setAttribute('stop-opacity', '1');
+                    gradient.appendChild(stop);
+                });
+
+                defs.appendChild(gradient);
+
+                svg.querySelectorAll('path').forEach(function(path) {
+                    const fill = path.getAttribute('fill');
+                    if (fill && fill !== '#ffffff' && fill !== '#f5f0ff' && fill !== 'none') {
+                        path.setAttribute('fill', 'url(#buildingTypeGradient)');
+                    }
+                });
+            }, 100);
+            // Apply gradient to Intelligent gauge arc after creation
+            setTimeout(function() {
+                const gaugeElement = document.getElementById('gauge-intelligent');
+                if (gaugeElement) {
+                    const svg = gaugeElement.querySelector('svg');
+                    if (svg) {
+                        // Create SVG gradient definition
+                        const defs = svg.querySelector('defs') || document.createElementNS(
+                            'http://www.w3.org/2000/svg', 'defs');
+                        if (!svg.querySelector('defs')) {
+                            svg.insertBefore(defs, svg.firstChild);
+                        }
+
+                        // Remove existing gradient if any
+                        const existingGradient = defs.querySelector('#intelligentGradient');
+                        if (existingGradient) {
+                            existingGradient.remove();
+                        }
+
+                        // Create linear gradient
+                        const gradient = document.createElementNS('http://www.w3.org/2000/svg',
+                            'linearGradient');
+                        gradient.setAttribute('id', 'intelligentGradient');
+                        gradient.setAttribute('x1', '0%');
+                        gradient.setAttribute('y1', '0%');
+                        gradient.setAttribute('x2', '100%');
+                        gradient.setAttribute('y2', '0%');
+
+                        // Add color stops: light orange to dark orange
+                        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop1.setAttribute('offset', '0%');
+                        stop1.setAttribute('stop-color', '#ffb74d'); // Light orange
+                        stop1.setAttribute('stop-opacity', '1');
+
+                        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop2.setAttribute('offset', '50%');
+                        stop2.setAttribute('stop-color', '#ff9800'); // Medium orange
+                        stop2.setAttribute('stop-opacity', '1');
+
+                        const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop3.setAttribute('offset', '100%');
+                        stop3.setAttribute('stop-color', '#e65100'); // Dark orange
+                        stop3.setAttribute('stop-opacity', '1');
+
+                        gradient.appendChild(stop1);
+                        gradient.appendChild(stop2);
+                        gradient.appendChild(stop3);
+                        defs.appendChild(gradient);
+
+                        // Find the gauge arc path and apply gradient
+                        const paths = svg.querySelectorAll('path');
+                        paths.forEach(function(path) {
+                            const fill = path.getAttribute('fill');
+                            // Apply gradient to the main gauge arc (usually the colored one)
+                            if (fill && fill !== '#ffffff' && fill !== '#fff8f0' && fill !==
+                                'none') {
+                                path.setAttribute('fill', 'url(#intelligentGradient)');
+                            }
+                        });
+                    }
+                }
+            }, 100);
 
             // Apply gradient to the gauge arc after creation
             setTimeout(function() {
@@ -527,10 +699,9 @@
                         gradient.setAttribute('y2', '0%');
 
                         // Add color stops: light green to dark green
-                        // Add color stops: darker green to dark green
                         const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
                         stop1.setAttribute('offset', '0%');
-                        stop1.setAttribute('stop-color', '#81c784'); // Medium-light green (darker start)
+                        stop1.setAttribute('stop-color', '#81c784'); // Medium-light green
                         stop1.setAttribute('stop-opacity', '1');
 
                         const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
@@ -556,6 +727,70 @@
                             if (fill && fill !== '#ffffff' && fill !== '#f5f8f4' && fill !==
                                 'none') {
                                 path.setAttribute('fill', 'url(#healthyGradient)');
+                            }
+                        });
+                    }
+                }
+            }, 100);
+
+            // Apply gradient to Mega Building gauge arc after creation
+            setTimeout(function() {
+                const gaugeElement = document.getElementById('gauge-mega-building');
+                if (gaugeElement) {
+                    const svg = gaugeElement.querySelector('svg');
+                    if (svg) {
+                        // Create SVG gradient definition
+                        const defs = svg.querySelector('defs') || document.createElementNS(
+                            'http://www.w3.org/2000/svg', 'defs');
+                        if (!svg.querySelector('defs')) {
+                            svg.insertBefore(defs, svg.firstChild);
+                        }
+
+                        // Remove existing gradient if any
+                        const existingGradient = defs.querySelector('#megaBuildingGradient');
+                        if (existingGradient) {
+                            existingGradient.remove();
+                        }
+
+                        // Create linear gradient
+                        const gradient = document.createElementNS('http://www.w3.org/2000/svg',
+                            'linearGradient');
+                        gradient.setAttribute('id', 'megaBuildingGradient');
+                        gradient.setAttribute('x1', '0%');
+                        gradient.setAttribute('y1', '0%');
+                        gradient.setAttribute('x2', '100%');
+                        gradient.setAttribute('y2', '0%');
+
+                        // Add color stops: light coral-orange to dark coral-orange (different from Intelligent)
+                        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop1.setAttribute('offset', '0%');
+                        stop1.setAttribute('stop-color', '#FFB380'); // Light coral-orange
+                        stop1.setAttribute('stop-opacity', '1');
+
+                        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop2.setAttribute('offset', '50%');
+                        stop2.setAttribute('stop-color', '#FF7043'); // Medium coral-orange
+                        stop2.setAttribute('stop-opacity', '1');
+
+                        const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                        stop3.setAttribute('offset', '100%');
+                        stop3.setAttribute('stop-color', '#D84315'); // Dark coral-orange
+                        stop3.setAttribute('stop-opacity', '1');
+
+                        gradient.appendChild(stop1);
+                        gradient.appendChild(stop2);
+                        gradient.appendChild(stop3);
+                        defs.appendChild(gradient);
+
+                        // Find the gauge arc path and apply gradient only to the filled portion
+                        const paths = svg.querySelectorAll('path');
+                        paths.forEach(function(path) {
+                            const fill = path.getAttribute('fill');
+                            // Apply gradient only to the filled gauge arc (not the background)
+                            // JustGage creates paths where the filled portion is the colored one
+                            if (fill && fill !== '#ffffff' && fill !== '#fff4f0' && fill !==
+                                'none' && !path.classList.contains('gauge-background')) {
+                                path.setAttribute('fill', 'url(#megaBuildingGradient)');
                             }
                         });
                     }

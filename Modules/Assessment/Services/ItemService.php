@@ -69,7 +69,6 @@ class ItemService
 
     public function getMegaBuildingPercentage(MegaBuilding $megaBuilding): float
     {
-
         $earnedPointsRecords = ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
             ->with('item')
             ->get();
@@ -77,7 +76,6 @@ class ItemService
         if ($earnedPointsRecords->isEmpty()) {
             return 0;
         }
-
 
         $optionalRecords = $earnedPointsRecords->filter(function ($record) {
             return $record->item && $record->item->type === 'Optional';
@@ -87,16 +85,11 @@ class ItemService
             return 0;
         }
 
-
         $totalEarned = $optionalRecords->sum('earned_points');
-
-
-
 
         $totalAvailable = $optionalRecords->sum(function ($record) {
             return $record->item->available_points;
         });
-
 
         if ($totalAvailable > 0) {
             return round(($totalEarned / $totalAvailable) * 100, 2);

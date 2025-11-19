@@ -29,6 +29,8 @@ final class ItemController extends Controller
         $assessmentGroupService = app(\Modules\Assessment\Services\AssessmentGroupService::class);
         $groupPercentages = $assessmentGroupService->getGroupPercentages($megaBuilding, $buildingType, $assessmentGroup);
         $megaBuildingPercentage = $this->itemService->getMegaBuildingPercentage($megaBuilding);
+        $buildingTypeAveragePercentage = $assessmentGroupService->getBuildingTypeAveragePercentage($megaBuilding, $buildingType);
+
 
         return view('assessment::items.index', [
             'items' => $items,
@@ -40,6 +42,7 @@ final class ItemController extends Controller
             'sustainablePercentage' => (float) ($groupPercentages['Sustainable'] ?? 0),
             'intelligentPercentage' => (float) ($groupPercentages['Intelligent'] ?? 0),
             'healthyPercentage' => (float) ($groupPercentages['Healthy'] ?? 0),
+            'buildingTypeAveragePercentage' => $buildingTypeAveragePercentage,
         ]);
     }
 
