@@ -19,4 +19,4 @@ use Modules\Assessment\App\Http\Controllers\ReportController;
 Route::get('mega-buildings/{mega_building}/types/{building_type}/assessment-groups', [AssessmentGroupController::class, 'index'])->name('assessment-groups.index');
 Route::get('mega-buildings/{mega_building}/types/{building_type}/assessment-groups/{assessment_group}/items', [ItemController::class, 'index'])->name('items.index');
 Route::post('mega-buildings/{mega_building}/types/{building_type}/assessment-groups/{assessment_group}/items/earned-points', [ItemController::class, 'storeEarnedPoints'])->name('items.store-earned-points');
-Route::get('mega-buildings/{mega_building}/report', [ReportController::class, 'show'])->name('reports.show');
+Route::get('mega-buildings/{mega_building}/report', [ReportController::class, 'show'])->name('mega-building.report');

@@ -1,7 +1,6 @@
 @extends('common::layouts.dashboard.master')
 
 @section('css')
-
 @endsection
 @section('content')
     <div class="container-fluid py-4">
@@ -17,8 +16,7 @@
                     <p class="mb-0 opacity-75 small">Manage your mega buildings, assessments, and scores in one place.</p>
                 </div>
                 <div class="mt-3 mt-md-0">
-                    <a href="{{ route('index') }}"
-                        class="btn btn-light btn-sm rounded-pill d-flex align-items-center"
+                    <a href="{{ route('index') }}" class="btn btn-light btn-sm rounded-pill d-flex align-items-center"
                         style="font-size: 0.9rem; padding: 0.35rem 1.2rem;">
                         <i class="bi bi-house-door me-1"></i>
                         Home
@@ -44,7 +42,7 @@
                 @if ($megaBuildings->isNotEmpty())
                     <div class="table-responsive ">
                         <table class="table align-middle mb-0 table-borderless table-hover">
-                           <thead class="table-light">
+                            <thead class="table-light">
                                 <tr>
                                     <th class="fw-semibold text-secondary">No.</th>
                                     <th class="fw-semibold text-secondary">Name</th>
@@ -53,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($megaBuildings as  $megaBuilding)
+                                @foreach ($megaBuildings as $megaBuilding)
                                     <tr class="border-bottom">
                                         <td>
                                             <span class="fw-semibold">{{ $loop->iteration }}</span>
@@ -73,15 +71,24 @@
                                                 <i class="bi bi-play-circle"></i>
                                                 Start Assessment
                                             </a>
-                                        <form action="{{ route('mega-buildings.destroy', $megaBuilding->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-3 d-inline-flex align-items-center gap-2"
-                                                onclick="return confirm('Are you sure you want to delete this Mega Building?');" title="Delete">
-                                                <i class="bi bi-trash"></i>
-                                                Delete
-                                            </button>
-                                        </form>
+                                            <a href="{{ route('mega-building.report', ['mega_building' => $megaBuilding->id]) }}"
+                                                class="text-white btn btn-success btn-sm rounded-pill px-3 d-inline-flex align-content-center gap-2">
+                                                <i class="bi bi-bar-chart"></i>
+                                                Report
+
+                                            </a>
+                                            <form action="{{ route('mega-buildings.destroy', $megaBuilding->id) }}"
+                                                method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-outline-danger btn-sm rounded-pill px-3 d-inline-flex align-items-center gap-2"
+                                                    onclick="return confirm('Are you sure you want to delete this Mega Building?');"
+                                                    title="Delete">
+                                                    <i class="bi bi-trash"></i>
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

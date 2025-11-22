@@ -135,7 +135,7 @@ class AssessmentGroupService
 
    public function getBuildingTypeAveragePercentage(MegaBuilding $megaBuilding, BuildingType $buildingType): float
 {
-    // Get all assessment groups
+
     $assessmentGroups = AssessmentGroup::all();
 
     if ($assessmentGroups->isEmpty()) {
@@ -145,7 +145,7 @@ class AssessmentGroupService
     $totalAvailable = 0.0;
     $totalEarned = 0.0;
 
-    // Sum earned and available points across all assessment groups for this building type
+
     foreach ($assessmentGroups as $group) {
         $optionalItems = Item::where('assessment_group_id', $group->id)
             ->where('type', 'Optional')
@@ -162,10 +162,10 @@ class AssessmentGroupService
             ->get()
             ->keyBy('item_id');
 
-        // Sum available points for this group
+
         $groupAvailable = $optionalItems->sum(fn(Item $item): float => (float) $item->available_points);
 
-        // Sum earned points for this group
+
         $groupEarned = $optionalItems->sum(function (Item $item) use ($earnedPoints): float {
             $earnedPoint = $earnedPoints->get($item->id);
             return $earnedPoint ? (float) $earnedPoint->earned_points : 0.0;
@@ -179,7 +179,7 @@ class AssessmentGroupService
         return 0.0;
     }
 
-    // Calculate percentage: Total EP / Total AP * 100%
+
     return round(($totalEarned / $totalAvailable) * 100, 2);
 }
 }
