@@ -132,6 +132,9 @@
                             </h6>
                             <div id="gauge-mega-building" class="d-flex align-items-center justify-content-center mx-auto"
                                 style="max-width: 300px; width: 100%; height: 200px;"></div>
+                            <div class="mt-2" style="font-size: 0.75rem; color: #6c757d;">
+                                EP: {{ $megaBuildingEP }} / AP: {{ $megaBuildingAP }}
+                            </div>
                         </div>
                     </div>
 
@@ -151,6 +154,9 @@
                                 <div id="gauge-building-type"
                                     class="d-flex justify-content-center align-items-center mx-auto"
                                     style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                <div class="mt-2" style="font-size: 0.75rem; color: #6c757d;">
+                                    EP: {{ $buildingTypeEP }} / AP: {{ $buildingTypeAP }}
+                                </div>
                             </div>
                         </div>
 
@@ -167,7 +173,12 @@
                                         <h6 class="fw-semibold mb-3 classification-sustainable" style="font-size: 0.85rem;">
                                             Sustainable
                                         </h6>
-                                        <div id="gauge-sustainable" class="d-flex justify-content-center align-items-center mx-auto" style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                        <div id="gauge-sustainable"
+                                            class="d-flex justify-content-center align-items-center mx-auto"
+                                            style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                        <div class="mt-2" style="font-size: 0.75rem; color: #6c757d;">
+                                            EP: {{ $sustainableEP }} / AP: {{ $sustainableAP }}
+                                        </div>
                                     </div>
                                     <!-- Vertical Divider -->
                                     <div class="vr position-absolute top-0 end-0 d-none d-md-block"
@@ -176,10 +187,16 @@
                                 <!-- Intelligent Gauge -->
                                 <div class="flex-fill position-relative">
                                     <div class="text-center p-3 bg-light rounded-3 h-100">
-                                        <h6 class="fw-semibold mb-3 classification-intelligent" style="font-size: 0.85rem;">
+                                        <h6 class="fw-semibold mb-3 classification-intelligent"
+                                            style="font-size: 0.85rem;">
                                             Intelligent
                                         </h6>
-                                        <div id="gauge-intelligent" class="d-flex justify-content-center align-items-center mx-auto" style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                        <div id="gauge-intelligent"
+                                            class="d-flex justify-content-center align-items-center mx-auto"
+                                            style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                        <div class="mt-2" style="font-size: 0.75rem; color: #6c757d;">
+                                            EP: {{ $intelligentEP }} / AP: {{ $intelligentAP }}
+                                        </div>
                                     </div>
                                     <!-- Vertical Divider -->
                                     <div class="vr position-absolute top-0 end-0 d-none d-md-block"
@@ -191,7 +208,12 @@
                                         <h6 class="fw-semibold mb-3 classification-healthy" style="font-size: 0.85rem;">
                                             Healthy
                                         </h6>
-                                        <div id="gauge-healthy" class="d-flex justify-content-center align-items-center mx-auto" style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                        <div id="gauge-healthy"
+                                            class="d-flex justify-content-center align-items-center mx-auto"
+                                            style="max-width: 300px; width: 100%; height: 200px;"></div>
+                                        <div class="mt-2" style="font-size: 0.75rem; color: #6c757d;">
+                                            EP: {{ $healthyEP }} / AP: {{ $healthyAP }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

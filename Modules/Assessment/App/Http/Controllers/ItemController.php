@@ -25,12 +25,43 @@ final class ItemController extends Controller
         $itemIds = $items->pluck('id')->toArray();
         $earnedPoints = $this->itemService->getEarnedPointsForItems($megaBuilding, $buildingType, $itemIds);
 
-        // Get percentages
+
         $assessmentGroupService = app(\Modules\Assessment\Services\AssessmentGroupService::class);
         $groupPercentages = $assessmentGroupService->getGroupPercentages($megaBuilding, $buildingType, $assessmentGroup);
         $megaBuildingPercentage = $this->itemService->getMegaBuildingPercentage($megaBuilding);
         $buildingTypeAveragePercentage = $assessmentGroupService->getBuildingTypeAveragePercentage($megaBuilding, $buildingType);
 
+
+        $megaBuildingEP = 0;
+        $megaBuildingAP = 0;
+        $megaBuildingRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
+            ->with('item')
+            ->get()
+            ->filter(function ($record) {
+                return $record->item && $record->item->type === 'Optional';
+            });
+        $megaBuildingEP = $megaBuildingRecords->sum('earned_points');
+        $megaBuildingAP = $megaBuildingRecords->sum(function ($record) {
+            return $record->item->available_points;
+        });
+
+
+        $buildingTypeEP = 0;
+        $buildingTypeAP = 0;
+        $buildingTypeRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
+            ->where('building_type_id', $buildingType->id)
+            ->with('item')
+            ->get()
+            ->filter(function ($record) {
+                return $record->item && $record->item->type === 'Optional';
+            });
+        $buildingTypeEP = $buildingTypeRecords->sum('earned_points');
+        $buildingTypeAP = $buildingTypeRecords->sum(function ($record) {
+            return $record->item->available_points;
+        });
+
+
+        $classificationData = $assessmentGroupService->getGroupPercentagesWithData($megaBuilding, $buildingType, $assessmentGroup);
 
         return view('assessment::items.index', [
             'items' => $items,
@@ -39,10 +70,20 @@ final class ItemController extends Controller
             'assessmentGroup' => $assessmentGroup,
             'earnedPoints' => $earnedPoints,
             'megaBuildingPercentage' => $megaBuildingPercentage,
+            'megaBuildingEP' => round($megaBuildingEP, 2),
+            'megaBuildingAP' => round($megaBuildingAP, 2),
             'sustainablePercentage' => (float) ($groupPercentages['Sustainable'] ?? 0),
+            'sustainableEP' => round($classificationData['Sustainable']['earned'] ?? 0, 2),
+            'sustainableAP' => round($classificationData['Sustainable']['available'] ?? 0, 2),
             'intelligentPercentage' => (float) ($groupPercentages['Intelligent'] ?? 0),
+            'intelligentEP' => round($classificationData['Intelligent']['earned'] ?? 0, 2),
+            'intelligentAP' => round($classificationData['Intelligent']['available'] ?? 0, 2),
             'healthyPercentage' => (float) ($groupPercentages['Healthy'] ?? 0),
+            'healthyEP' => round($classificationData['Healthy']['earned'] ?? 0, 2),
+            'healthyAP' => round($classificationData['Healthy']['available'] ?? 0, 2),
             'buildingTypeAveragePercentage' => $buildingTypeAveragePercentage,
+            'buildingTypeEP' => round($buildingTypeEP, 2),
+            'buildingTypeAP' => round($buildingTypeAP, 2),
         ]);
     }
 
@@ -59,7 +100,7 @@ final class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -83,7 +124,7 @@ final class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -91,7 +132,7 @@ final class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 
     /**
