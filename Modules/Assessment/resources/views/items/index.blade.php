@@ -421,8 +421,8 @@
 
 @section('js')
     <!-- JustGage Library -->
-    <script src="https://cdn.jsdelivr.net/npm/raphael@2.3.0/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/justgage@1.6.1/justgage.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/raphael@2.3.0/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/justgage@1.6.1/justgage.min.js"></script> --}}
 
     <script>
         // Initialize gauges

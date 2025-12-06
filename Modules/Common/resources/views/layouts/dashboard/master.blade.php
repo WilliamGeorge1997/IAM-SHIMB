@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Mega Building Assessment - {{ config('app.name', 'Laravel') }}</title>
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.webp') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-icons.min.css') }}">
+
     <style>
         body {
             background-color: rgb(230, 230, 230);
@@ -47,11 +49,13 @@
     </style>
     @yield('css')
 </head>
+
 <body>
 
     @yield('content')
 
-
+    <script src="{{ asset('assets/js/raphael.min.js') }}"></script>
+    <script src="{{ asset('assets/js/justgage.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     @yield('js')
 </body>

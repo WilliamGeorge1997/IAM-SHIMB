@@ -13,12 +13,13 @@
                     <h3 class="hero-subtitle">Integrated Assessment Model for Sustainable, Healthy and Intelligent Mega
                         Buildings</h3>
                     <p class="hero-description">
-                        A comprehensive web-based platform for evaluating and optimizing building sustainability,
-                        health, and intelligence across multiple assessment criteria. Transform your building projects
-                        with data-driven insights and cutting-edge evaluation tools.
+                        A comprehensive web-based program for evaluating and optimizing Mega Building’s sustainability,
+                        health, and intelligence across multiple assessment
+                        criteria. Transform your Mega Building projects with data-driven insights and cutting-edge
+                        evaluation tools.
                     </p>
                     <div class="hero-actions d-flex flex-wrap gap-3">
-                        <a class="btn btn-custom btn-lg">
+                        <a href="{{ route('mega-buildings.index') }}" class="btn btn-custom btn-lg">
                             <span><i class="bi bi-play-circle me-2"></i>Start Assessment</span>
                         </a>
                         <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg">
@@ -137,40 +138,60 @@
                 <p class="section-subtitle">Simple steps to evaluate your building project</p>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-3">
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
                     <div class="card step-card text-center">
                         <div class="step-number">1</div>
                         <h5 class="mb-3 fw-bold">Start Assessment</h5>
                         <p class="text-muted mb-0 small">
-                            Create a new project and select your building type.
+                            Create a new Mega Project and select your 1st building type from 10 buildings types.
                         </p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card step-card text-center">
                         <div class="step-number">2</div>
                         <h5 class="mb-3 fw-bold">Complete Groups</h5>
                         <p class="text-muted mb-0 small">
-                            Evaluate your building across 17 assessment groups.
+                            Evaluate your 1st selected building type across 17 assessment groups.
                         </p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card step-card text-center">
                         <div class="step-number">3</div>
-                        <h5 class="mb-3 fw-bold">Get Scores</h5>
+                        <h5 class="mb-3 fw-bold">Get Score</h5>
                         <p class="text-muted mb-0 small">
                             View automated calculations of Available Points (AP) and Earned Points (EP).
                         </p>
                     </div>
                 </div>
-                <div class="col-md-3">
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
                     <div class="card step-card text-center">
                         <div class="step-number">4</div>
                         <h5 class="mb-3 fw-bold">View Reports</h5>
                         <p class="text-muted mb-0 small">
-                            Generate comprehensive reports and insights for stakeholders.
+                            Generate the 1st selected building type reports.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card step-card text-center">
+                        <div class="step-number">5</div>
+                        <h5 class="mb-3 fw-bold">Re-Start Assessment</h5>
+                        <p class="text-muted mb-0 small">
+                            Apply the same steps (1-4) for the remaining 9 buildings types.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card step-card text-center">
+                        <div class="step-number">6</div>
+                        <h5 class="mb-3 fw-bold">View Final Reports</h5>
+                        <p class="text-muted mb-0 small">
+                            Generate comprehensive reports including 10 buildings types and insights for stakeholders.
                         </p>
                     </div>
                 </div>
@@ -183,7 +204,7 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title">Why Choose IAM-SHIMB</h2>
-                <p class="section-subtitle">Comprehensive benefits for your building projects</p>
+                <p class="section-subtitle"> Comprehensive benefits for your Mega Building projects</p>
             </div>
 
             <div class="row g-4">
@@ -192,9 +213,10 @@
                         <div class="benefit-icon">
                             <i class="bi bi-check-circle"></i>
                         </div>
-                       <h5 class="mb-3 fw-bold">Comprehensive Coverage</h5>
+                        <h5 class="mb-3 fw-bold">Comprehensive Coverage</h5>
                         <p class="text-muted mb-0">
-                            Evaluate all aspects of your building from sustainability and health to intelligent systems in one integrated platform.
+                            Evaluate all aspects of your Mega Building from sustainability and health to intelligent systems
+                            in one integrated platform.
                         </p>
                     </div>
                 </div>
@@ -229,9 +251,10 @@
     <section class="section-spacing fade-in">
         <div class="container">
             <div class="cta-section text-center">
-                <h2 class="section-title mb-4">Ready to Assess Your Building?</h2>
-                <p class="lead mb-4">Start evaluating your project with our comprehensive assessment model</p>
-                <a class="btn btn-light btn-lg" style="border-radius: 50px; padding: 14px 45px; font-weight: 600;">
+                <h2 class="section-title mb-4">Ready to Assess Your Mega Building</h2>
+                <p class="lead mb-4"> Start evaluating your Mega Building project with our
+                    comprehensive assessment model</p>
+                <a href="{{ route('mega-buildings.index') }}" class="btn btn-light btn-lg" style="border-radius: 50px; padding: 14px 45px; font-weight: 600;">
                     <i class="bi bi-arrow-right-circle me-2"></i>Get Started Now
                 </a>
             </div>

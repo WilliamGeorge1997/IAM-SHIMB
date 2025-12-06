@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('run-migrate', function () {
+    Artisan::call('migrate');
+    return Artisan::output();
+});
 
-// API Tester Route
+Route::get('run-seed', function () {
+    Artisan::call('db:seed');
+    return Artisan::output();
+});
