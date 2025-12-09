@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Modules\Build\App\Models\MegaBuilding;
 use Modules\Build\Services\BuildingTypeService;
 
-
 class BuildingTypeController extends Controller
 {
     public function __construct(private BuildingTypeService $buildingTypeService)
     {
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -28,10 +28,57 @@ class BuildingTypeController extends Controller
             );
         }
 
+        // Calculate mega building percentage
+        $itemService = app(\Modules\Assessment\Services\ItemService::class);
+        $megaBuildingPercentage = $itemService->getMegaBuildingPercentage($mega_building);
+
+        // Calculate mega building EP and AP
+        $megaBuildingEP = 0;
+        $megaBuildingAP = 0;
+        $megaBuildingRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $mega_building->id)
+            ->with('item')
+            ->get()
+            ->filter(function ($record) {
+                return $record->item && $record->item->type === 'Optional';
+            });
+        $megaBuildingEP = $megaBuildingRecords->sum('earned_points');
+        $megaBuildingAP = $megaBuildingRecords->sum(function ($record) {
+            return $record->item->available_points;
+        });
+
+        // Calculate individual building type percentages and EP/AP
+        $buildingTypeGaugeData = [];
+        $assessmentGroupService = app(\Modules\Assessment\Services\AssessmentGroupService::class);
+
+        foreach ($buildingTypes as $buildingType) {
+            $btPercentage = $assessmentGroupService->getBuildingTypeAveragePercentage($mega_building, $buildingType);
+
+            // Calculate EP and AP for this building type
+            $btRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $mega_building->id)
+                ->where('building_type_id', $buildingType->id)
+                ->with('item')
+                ->get()
+                ->filter(function ($record) {
+                    return $record->item && $record->item->type === 'Optional';
+                });
+
+            $buildingTypeGaugeData[$buildingType->id] = [
+                'percentage' => $btPercentage,
+                'ep' => round($btRecords->sum('earned_points'), 2),
+                'ap' => round($btRecords->sum(function ($record) {
+                    return $record->item->available_points;
+                }), 2),
+            ];
+        }
+
         return view('build::building-types.index', [
             'buildingTypes' => $buildingTypes,
             'megaBuilding' => $mega_building,
             'buildingTypePercentages' => $buildingTypePercentages,
+            'megaBuildingPercentage' => $megaBuildingPercentage,
+            'megaBuildingEP' => round($megaBuildingEP, 2),
+            'megaBuildingAP' => round($megaBuildingAP, 2),
+            'buildingTypeGaugeData' => $buildingTypeGaugeData,
         ]);
     }
 
@@ -48,14 +95,13 @@ class BuildingTypeController extends Controller
      */
     public function store(Request $request)
     {
-
     }
+
     /**
      * Show the specified resource.
      */
     public function show($id)
     {
-
     }
 
     /**
@@ -63,7 +109,6 @@ class BuildingTypeController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -79,6 +124,5 @@ class BuildingTypeController extends Controller
      */
     public function destroy(MegaBuilding $mega_building)
     {
-
     }
 }
