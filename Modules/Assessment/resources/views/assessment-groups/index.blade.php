@@ -86,49 +86,90 @@
                 </h2>
             </div>
             <div class="card-body">
-                <div class="d-flex flex-wrap gap-2 justify-content-center">
-                    <!-- Mega Building Gauge -->
-                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
-                        <h6 class="fw-semibold mb-2" style="font-size: 0.7rem; color: #6c757d;">Mega Building</h6>
-                        <div id="gauge-mega-building" style="width: 100%; height: 120px;"></div>
-                        <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
-                            EP: {{ $megaBuildingEP }} / AP: {{ $megaBuildingAP }}
+                <div class="row g-3">
+                    <!-- LEFT GROUP: Mega Building Overall Metrics -->
+                    <div class="col-12 col-lg-6">
+                        <div class="border rounded-3 p-3 h-100" style="border-color: #d1c4e9 !important;">
+                            <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                <!-- Mega Building Gauge -->
+                                <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 130px; max-width: 160px;">
+                                    <h6 class="fw-semibold mb-2" style="font-size: 0.7rem; color: #673ab7;">Mega Building</h6>
+                                    <div id="gauge-mega-building" style="width: 100%; height: 110px;"></div>
+                                    <div class="mt-1" style="font-size: 0.6rem; color: #6c757d;">
+                                        EP: {{ $megaBuildingEP }} / AP: {{ $megaBuildingAP }}
+                                    </div>
+                                </div>
+
+                                <!-- Mega Building Sustainable Gauge -->
+                                <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 130px; max-width: 160px;">
+                                    <h6 class="fw-semibold mb-2 classification-sustainable" style="font-size: 0.7rem;">Sustainable</h6>
+                                    <div id="gauge-mega-sustainable" style="width: 100%; height: 110px;"></div>
+                                    <div class="mt-1" style="font-size: 0.6rem; color: #6c757d;">
+                                        EP: {{ $megaSustainableEP }} / AP: {{ $megaSustainableAP }}
+                                    </div>
+                                </div>
+
+                                <!-- Mega Building Healthy Gauge -->
+                                <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 130px; max-width: 160px;">
+                                    <h6 class="fw-semibold mb-2 classification-healthy" style="font-size: 0.7rem;">Healthy</h6>
+                                    <div id="gauge-mega-healthy" style="width: 100%; height: 110px;"></div>
+                                    <div class="mt-1" style="font-size: 0.6rem; color: #6c757d;">
+                                        EP: {{ $megaHealthyEP }} / AP: {{ $megaHealthyAP }}
+                                    </div>
+                                </div>
+
+                                <!-- Mega Building Intelligent Gauge -->
+                                <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 130px; max-width: 160px;">
+                                    <h6 class="fw-semibold mb-2 classification-intelligent" style="font-size: 0.7rem;">Intelligent</h6>
+                                    <div id="gauge-mega-intelligent" style="width: 100%; height: 110px;"></div>
+                                    <div class="mt-1" style="font-size: 0.6rem; color: #6c757d;">
+                                        EP: {{ $megaIntelligentEP }} / AP: {{ $megaIntelligentAP }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Building Type Gauge -->
-                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
-                        <h6 class="fw-semibold mb-2" style="font-size: 0.7rem; color: #6c757d;">Building Type</h6>
-                        <div id="gauge-building-type" style="width: 100%; height: 120px;"></div>
-                        <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
-                            EP: {{ $buildingTypeEP }} / AP: {{ $buildingTypeAP }}
-                        </div>
-                    </div>
+                    <!-- RIGHT GROUP: Building Type Specific Metrics -->
+                    <div class="col-12 col-lg-6">
+                        <div class="border rounded-3 p-3 h-100" style="border-color: #d1c4e9 !important;">
+                            <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                <!-- Building Type Overall Gauge -->
+                                <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 130px; max-width: 160px;">
+                                    <h6 class="fw-semibold mb-2" style="font-size: 0.7rem; color: #673ab7;">{{ $buildingType->name }}</h6>
+                                    <div id="gauge-building-type" style="width: 100%; height: 110px;"></div>
+                                    <div class="mt-1" style="font-size: 0.6rem; color: #6c757d;">
+                                        EP: {{ $buildingTypeEP }} / AP: {{ $buildingTypeAP }}
+                                    </div>
+                                </div>
 
-                    <!-- Sustainable Gauge -->
-                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
-                        <h6 class="fw-semibold mb-2 classification-sustainable" style="font-size: 0.7rem;">Sustainable</h6>
-                        <div id="gauge-sustainable" style="width: 100%; height: 120px;"></div>
-                        <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
-                            EP: {{ $sustainableEP }} / AP: {{ $sustainableAP }}
-                        </div>
-                    </div>
+                                <!-- Building Type Sustainable Gauge -->
+                                <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 130px; max-width: 160px;">
+                                    <h6 class="fw-semibold mb-2 classification-sustainable" style="font-size: 0.7rem;">Sustainable</h6>
+                                    <div id="gauge-sustainable" style="width: 100%; height: 110px;"></div>
+                                    <div class="mt-1" style="font-size: 0.6rem; color: #6c757d;">
+                                        EP: {{ $sustainableEP }} / AP: {{ $sustainableAP }}
+                                    </div>
+                                </div>
 
-                    <!-- Intelligent Gauge -->
-                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
-                        <h6 class="fw-semibold mb-2 classification-intelligent" style="font-size: 0.7rem;">Intelligent</h6>
-                        <div id="gauge-intelligent" style="width: 100%; height: 120px;"></div>
-                        <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
-                            EP: {{ $intelligentEP }} / AP: {{ $intelligentAP }}
-                        </div>
-                    </div>
+                                <!-- Building Type Healthy Gauge -->
+                                <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 130px; max-width: 160px;">
+                                    <h6 class="fw-semibold mb-2 classification-healthy" style="font-size: 0.7rem;">Healthy</h6>
+                                    <div id="gauge-healthy" style="width: 100%; height: 110px;"></div>
+                                    <div class="mt-1" style="font-size: 0.6rem; color: #6c757d;">
+                                        EP: {{ $healthyEP }} / AP: {{ $healthyAP }}
+                                    </div>
+                                </div>
 
-                    <!-- Healthy Gauge -->
-                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
-                        <h6 class="fw-semibold mb-2 classification-healthy" style="font-size: 0.7rem;">Healthy</h6>
-                        <div id="gauge-healthy" style="width: 100%; height: 120px;"></div>
-                        <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
-                            EP: {{ $healthyEP }} / AP: {{ $healthyAP }}
+                                <!-- Building Type Intelligent Gauge -->
+                                <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 130px; max-width: 160px;">
+                                    <h6 class="fw-semibold mb-2 classification-intelligent" style="font-size: 0.7rem;">Intelligent</h6>
+                                    <div id="gauge-intelligent" style="width: 100%; height: 110px;"></div>
+                                    <div class="mt-1" style="font-size: 0.6rem; color: #6c757d;">
+                                        EP: {{ $intelligentEP }} / AP: {{ $intelligentAP }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -244,7 +285,10 @@
             }
 
             // Initialize gauges (smaller size for overview)
-            // Mega Building Gauge
+
+            // ============ LEFT GROUP: MEGA BUILDING GAUGES ============
+
+            // Mega Building Overall Gauge (Violet)
             const megaBuildingGauge = new JustGage({
                 id: "gauge-mega-building",
                 value: {{ $megaBuildingPercentage }},
@@ -256,14 +300,73 @@
                 pointer: true,
                 counter: true,
                 decimals: 2,
-                gaugeColor: "#fff4f0",
-                levelColors: ["#ffe0d6"],
+                gaugeColor: "#f5f0ff",
+                levelColors: ["#e0d7ff"],
                 textRenderer: function(value) {
                     return value.toFixed(2) + "%";
                 }
             });
 
-            // Building Type Gauge
+            // Mega Building Sustainable Gauge
+            const megaSustainableGauge = new JustGage({
+                id: "gauge-mega-sustainable",
+                value: {{ $megaSustainablePercentage }},
+                min: 0,
+                max: 100,
+                title: "",
+                label: "%",
+                gaugeWidthScale: 0.5,
+                pointer: true,
+                counter: true,
+                decimals: 2,
+                gaugeColor: "#f3f7fc",
+                levelColors: ["#e3f2fd"],
+                textRenderer: function(value) {
+                    return value.toFixed(2) + "%";
+                }
+            });
+
+            // Mega Building Healthy Gauge
+            const megaHealthyGauge = new JustGage({
+                id: "gauge-mega-healthy",
+                value: {{ $megaHealthyPercentage }},
+                min: 0,
+                max: 100,
+                title: "",
+                label: "%",
+                gaugeWidthScale: 0.5,
+                pointer: true,
+                counter: true,
+                decimals: 2,
+                gaugeColor: "#f5f8f4",
+                levelColors: ["#e5f7e5"],
+                textRenderer: function(value) {
+                    return value.toFixed(2) + "%";
+                }
+            });
+
+            // Mega Building Intelligent Gauge
+            const megaIntelligentGauge = new JustGage({
+                id: "gauge-mega-intelligent",
+                value: {{ $megaIntelligentPercentage }},
+                min: 0,
+                max: 100,
+                title: "",
+                label: "%",
+                gaugeWidthScale: 0.5,
+                pointer: true,
+                counter: true,
+                decimals: 2,
+                gaugeColor: "#fff8f0",
+                levelColors: ["#ffe0b2"],
+                textRenderer: function(value) {
+                    return value.toFixed(2) + "%";
+                }
+            });
+
+            // ============ RIGHT GROUP: BUILDING TYPE GAUGES ============
+
+            // Building Type Overall Gauge
             const buildingTypeGauge = new JustGage({
                 id: "gauge-building-type",
                 value: {{ $buildingTypeAveragePercentage }},
@@ -282,7 +385,7 @@
                 }
             });
 
-            // Sustainable Gauge
+            // Building Type Sustainable Gauge
             const sustainableGauge = new JustGage({
                 id: "gauge-sustainable",
                 value: {{ $sustainablePercentage }},
@@ -301,26 +404,7 @@
                 }
             });
 
-            // Intelligent Gauge
-            const intelligentGauge = new JustGage({
-                id: "gauge-intelligent",
-                value: {{ $intelligentPercentage }},
-                min: 0,
-                max: 100,
-                title: "",
-                label: "%",
-                gaugeWidthScale: 0.5,
-                pointer: true,
-                counter: true,
-                decimals: 2,
-                gaugeColor: "#fff8f0",
-                levelColors: ["#ffe0b2"],
-                textRenderer: function(value) {
-                    return value.toFixed(2) + "%";
-                }
-            });
-
-            // Healthy Gauge
+            // Building Type Healthy Gauge
             const healthyGauge = new JustGage({
                 id: "gauge-healthy",
                 value: {{ $healthyPercentage }},
@@ -334,6 +418,25 @@
                 decimals: 2,
                 gaugeColor: "#f5f8f4",
                 levelColors: ["#e5f7e5"],
+                textRenderer: function(value) {
+                    return value.toFixed(2) + "%";
+                }
+            });
+
+            // Building Type Intelligent Gauge
+            const intelligentGauge = new JustGage({
+                id: "gauge-intelligent",
+                value: {{ $intelligentPercentage }},
+                min: 0,
+                max: 100,
+                title: "",
+                label: "%",
+                gaugeWidthScale: 0.5,
+                pointer: true,
+                counter: true,
+                decimals: 2,
+                gaugeColor: "#fff8f0",
+                levelColors: ["#ffe0b2"],
                 textRenderer: function(value) {
                     return value.toFixed(2) + "%";
                 }
@@ -387,35 +490,66 @@
             }
 
             // Apply gradients
-            applyGradient('gauge-mega-building', 'megaBuildingGradient', [
-                ['0%', '#FFB380'],
-                ['50%', '#FF7043'],
-                ['100%', '#D84315']
-            ], ['#ffffff', '#fff4f0']);
 
+            // ============ LEFT GROUP: MEGA BUILDING GRADIENTS ============
+
+            // Mega Building - Violet gradient
+            applyGradient('gauge-mega-building', 'megaBuildingGradient', [
+                ['0%', '#d1c4e9'],
+                ['50%', '#b39ddb'],
+                ['100%', '#673ab7']
+            ], ['#ffffff', '#f5f0ff']);
+
+            // Mega Building Sustainable - Blue gradient
+            applyGradient('gauge-mega-sustainable', 'megaSustainableGradient', [
+                ['0%', '#90caf9'],
+                ['50%', '#64b5f6'],
+                ['100%', '#1565c0']
+            ], ['#ffffff', '#f3f7fc']);
+
+            // Mega Building Healthy - Green gradient
+            applyGradient('gauge-mega-healthy', 'megaHealthyGradient', [
+                ['0%', '#81c784'],
+                ['50%', '#66bb6a'],
+                ['100%', '#1b5e20']
+            ], ['#ffffff', '#f5f8f4']);
+
+            // Mega Building Intelligent - Orange gradient
+            applyGradient('gauge-mega-intelligent', 'megaIntelligentGradient', [
+                ['0%', '#ffb74d'],
+                ['50%', '#ff9800'],
+                ['100%', '#e65100']
+            ], ['#ffffff', '#fff8f0']);
+
+            // ============ RIGHT GROUP: BUILDING TYPE GRADIENTS ============
+
+            // Building Type - Violet gradient
             applyGradient('gauge-building-type', 'buildingTypeGradient', [
                 ['0%', '#d1c4e9'],
                 ['50%', '#b39ddb'],
                 ['100%', '#673ab7']
             ], ['#ffffff', '#f5f0ff']);
 
+            // Building Type Sustainable - Blue gradient
             applyGradient('gauge-sustainable', 'sustainableGradient', [
                 ['0%', '#90caf9'],
                 ['50%', '#64b5f6'],
                 ['100%', '#1565c0']
             ], ['#ffffff', '#f3f7fc']);
 
-            applyGradient('gauge-intelligent', 'intelligentGradient', [
-                ['0%', '#ffb74d'],
-                ['50%', '#ff9800'],
-                ['100%', '#e65100']
-            ], ['#ffffff', '#fff8f0']);
-
+            // Building Type Healthy - Green gradient
             applyGradient('gauge-healthy', 'healthyGradient', [
                 ['0%', '#81c784'],
                 ['50%', '#66bb6a'],
                 ['100%', '#1b5e20']
             ], ['#ffffff', '#f5f8f4']);
+
+            // Building Type Intelligent - Orange gradient
+            applyGradient('gauge-intelligent', 'intelligentGradient', [
+                ['0%', '#ffb74d'],
+                ['50%', '#ff9800'],
+                ['100%', '#e65100']
+            ], ['#ffffff', '#fff8f0']);
         });
     </script>
 @endsection

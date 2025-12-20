@@ -71,34 +71,39 @@
             </div>
             <div class="card-body">
                 <div class="d-flex flex-wrap gap-2 justify-content-center">
-                    <!-- Mega Building Gauge -->
-                    <div class="text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
-                        <h6 class="fw-semibold mb-2" style="font-size: 0.7rem; color: #6c757d;">Mega Building</h6>
+                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
+                        <h6 class="fw-semibold mb-2" style="font-size: 0.7rem; color: #673ab7;">Mega Building</h6>
                         <div id="gauge-mega-building" style="width: 100%; height: 120px;"></div>
                         <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
                             EP: {{ $megaBuildingEP }} / AP: {{ $megaBuildingAP }}
                         </div>
                     </div>
 
-                    <!-- Individual Building Type Gauges -->
-                    @foreach ($buildingTypes as $buildingType)
-                        @php
-                            $gaugeData = $buildingTypeGaugeData[$buildingType->id] ?? [
-                                'percentage' => 0,
-                                'ep' => 0,
-                                'ap' => 0,
-                            ];
-                        @endphp
-                        <div class="text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
-                            <h6 class="fw-semibold mb-2" style="font-size: 0.7rem; color: #6c757d;">
-                                {{ $buildingType->name }}
-                            </h6>
-                            <div id="gauge-building-type-{{ $buildingType->id }}" style="width: 100%; height: 120px;"></div>
-                            <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
-                                EP: {{ $gaugeData['ep'] }} / AP: {{ $gaugeData['ap'] }}
-                            </div>
+                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
+                        <h6 class="fw-semibold mb-2 classification-sustainable" style="font-size: 0.7rem;">Sustainable</h6>
+                        <div id="gauge-sustainable" style="width: 100%; height: 120px;"></div>
+                        <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
+                            EP: {{ $sustainableEP }} / AP: {{ $sustainableAP }}
                         </div>
-                    @endforeach
+                    </div>
+
+                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
+                        <h6 class="fw-semibold mb-2 classification-healthy" style="font-size: 0.7rem;">Healthy</h6>
+                        <div id="gauge-healthy" style="width: 100%; height: 120px;"></div>
+                        <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
+                            EP: {{ $healthyEP }} / AP: {{ $healthyAP }}
+                        </div>
+                    </div>
+
+
+
+                    <div class="flex-fill text-center p-2 bg-light rounded-3" style="min-width: 150px; max-width: 200px;">
+                        <h6 class="fw-semibold mb-2 classification-intelligent" style="font-size: 0.7rem;">Intelligent</h6>
+                        <div id="gauge-intelligent" style="width: 100%; height: 120px;"></div>
+                        <div class="mt-1" style="font-size: 0.65rem; color: #6c757d;">
+                            EP: {{ $intelligentEP }} / AP: {{ $intelligentAP }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -209,7 +214,6 @@
                 }, 3000);
             }
 
-            // Initialize Mega Building Gauge
             const megaBuildingGauge = new JustGage({
                 id: "gauge-mega-building",
                 value: {{ $megaBuildingPercentage }},
@@ -221,124 +225,66 @@
                 pointer: true,
                 counter: true,
                 decimals: 2,
-                gaugeColor: "#fff4f0",
-                levelColors: ["#ffe0d6"],
+                gaugeColor: "#f5f0ff",
+                levelColors: ["#e0d7ff"],
                 textRenderer: function(value) {
                     return value.toFixed(2) + "%";
                 }
             });
 
-            // Color schemes for building types
-            const colorSchemes = [{
-                    gaugeColor: "#f3f7fc",
-                    levelColor: "#e3f2fd",
-                    gradient: [
-                        ['0%', '#90caf9'],
-                        ['50%', '#64b5f6'],
-                        ['100%', '#1565c0']
-                    ],
-                    bgColors: ['#ffffff', '#f3f7fc']
-                },
-                {
-                    gaugeColor: "#f5f8f4",
-                    levelColor: "#e5f7e5",
-                    gradient: [
-                        ['0%', '#81c784'],
-                        ['50%', '#66bb6a'],
-                        ['100%', '#1b5e20']
-                    ],
-                    bgColors: ['#ffffff', '#f5f8f4']
-                },
-                {
-                    gaugeColor: "#fff8f0",
-                    levelColor: "#ffe0b2",
-                    gradient: [
-                        ['0%', '#ffb74d'],
-                        ['50%', '#ff9800'],
-                        ['100%', '#e65100']
-                    ],
-                    bgColors: ['#ffffff', '#fff8f0']
-                },
-                {
-                    gaugeColor: "#f5f0ff",
-                    levelColor: "#e0d7ff",
-                    gradient: [
-                        ['0%', '#d1c4e9'],
-                        ['50%', '#b39ddb'],
-                        ['100%', '#673ab7']
-                    ],
-                    bgColors: ['#ffffff', '#f5f0ff']
-                },
-                {
-                    gaugeColor: "#f0f9ff",
-                    levelColor: "#cfe2f3",
-                    gradient: [
-                        ['0%', '#4fc3f7'],
-                        ['50%', '#29b6f6'],
-                        ['100%', '#0277bd']
-                    ],
-                    bgColors: ['#ffffff', '#f0f9ff']
-                },
-                {
-                    gaugeColor: "#fff0f5",
-                    levelColor: "#fce4ec",
-                    gradient: [
-                        ['0%', '#f48fb1'],
-                        ['50%', '#ec407a'],
-                        ['100%', '#c2185b']
-                    ],
-                    bgColors: ['#ffffff', '#fff0f5']
-                },
-                {
-                    gaugeColor: "#f3e5f5",
-                    levelColor: "#e1bee7",
-                    gradient: [
-                        ['0%', '#ba68c8'],
-                        ['50%', '#ab47bc'],
-                        ['100%', '#6a1b9a']
-                    ],
-                    bgColors: ['#ffffff', '#f3e5f5']
-                },
-                {
-                    gaugeColor: "#fff9e6",
-                    levelColor: "#fff9c4",
-                    gradient: [
-                        ['0%', '#ffd54f'],
-                        ['50%', '#ffc107'],
-                        ['100%', '#f57f17']
-                    ],
-                    bgColors: ['#ffffff', '#fff9e6']
+            const sustainableGauge = new JustGage({
+                id: "gauge-sustainable",
+                value: {{ $sustainablePercentage }},
+                min: 0,
+                max: 100,
+                title: "",
+                label: "%",
+                gaugeWidthScale: 0.5,
+                pointer: true,
+                counter: true,
+                decimals: 2,
+                gaugeColor: "#f3f7fc",
+                levelColors: ["#e3f2fd"],
+                textRenderer: function(value) {
+                    return value.toFixed(2) + "%";
                 }
-            ];
+            });
 
-            // Initialize Individual Building Type Gauges
-            @foreach ($buildingTypes as $index => $buildingType)
-                @php
-                    $gaugeData = $buildingTypeGaugeData[$buildingType->id] ?? [
-                        'percentage' => 0,
-                        'ep' => 0,
-                        'ap' => 0,
-                    ];
-                    $colorIndex = $index % 8;
-                @endphp
-                const buildingTypeGauge{{ $buildingType->id }} = new JustGage({
-                    id: "gauge-building-type-{{ $buildingType->id }}",
-                    value: {{ $gaugeData['percentage'] }},
-                    min: 0,
-                    max: 100,
-                    title: "",
-                    label: "%",
-                    gaugeWidthScale: 0.5,
-                    pointer: true,
-                    counter: true,
-                    decimals: 2,
-                    gaugeColor: colorSchemes[{{ $colorIndex }}].gaugeColor,
-                    levelColors: [colorSchemes[{{ $colorIndex }}].levelColor],
-                    textRenderer: function(value) {
-                        return value.toFixed(2) + "%";
-                    }
-                });
-            @endforeach
+            const intelligentGauge = new JustGage({
+                id: "gauge-intelligent",
+                value: {{ $intelligentPercentage }},
+                min: 0,
+                max: 100,
+                title: "",
+                label: "%",
+                gaugeWidthScale: 0.5,
+                pointer: true,
+                counter: true,
+                decimals: 2,
+                gaugeColor: "#fff8f0",
+                levelColors: ["#ffe0b2"],
+                textRenderer: function(value) {
+                    return value.toFixed(2) + "%";
+                }
+            });
+
+            const healthyGauge = new JustGage({
+                id: "gauge-healthy",
+                value: {{ $healthyPercentage }},
+                min: 0,
+                max: 100,
+                title: "",
+                label: "%",
+                gaugeWidthScale: 0.5,
+                pointer: true,
+                counter: true,
+                decimals: 2,
+                gaugeColor: "#f5f8f4",
+                levelColors: ["#e5f7e5"],
+                textRenderer: function(value) {
+                    return value.toFixed(2) + "%";
+                }
+            });
 
             // Apply gradient function
             function applyGradient(gaugeId, gradientId, colors, bgColors) {
@@ -389,21 +335,28 @@
 
             // Apply gradient to Mega Building gauge
             applyGradient('gauge-mega-building', 'megaBuildingGradient', [
-                ['0%', '#FFB380'],
-                ['50%', '#FF7043'],
-                ['100%', '#D84315']
-            ], ['#ffffff', '#fff4f0']);
+                ['0%', '#d1c4e9'],
+                ['50%', '#b39ddb'],
+                ['100%', '#673ab7']
+            ], ['#ffffff', '#f5f0ff']);
 
-            // Apply gradients to Building Type gauges
-            @foreach ($buildingTypes as $index => $buildingType)
-                @php
-                    $colorIndex = $index % 8;
-                @endphp
-                applyGradient('gauge-building-type-{{ $buildingType->id }}',
-                    'buildingTypeGradient{{ $buildingType->id }}',
-                    colorSchemes[{{ $colorIndex }}].gradient,
-                    colorSchemes[{{ $colorIndex }}].bgColors);
-            @endforeach
+            applyGradient('gauge-sustainable', 'sustainableGradient', [
+                ['0%', '#90caf9'],
+                ['50%', '#64b5f6'],
+                ['100%', '#1565c0']
+            ], ['#ffffff', '#f3f7fc']);
+
+            applyGradient('gauge-intelligent', 'intelligentGradient', [
+                ['0%', '#ffb74d'],
+                ['50%', '#ff9800'],
+                ['100%', '#e65100']
+            ], ['#ffffff', '#fff8f0']);
+
+            applyGradient('gauge-healthy', 'healthyGradient', [
+                ['0%', '#81c784'],
+                ['50%', '#66bb6a'],
+                ['100%', '#1b5e20']
+            ], ['#ffffff', '#f5f8f4']);
         });
     </script>
 @endsection

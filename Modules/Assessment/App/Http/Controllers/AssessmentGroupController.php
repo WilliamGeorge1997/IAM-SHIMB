@@ -61,7 +61,10 @@ class AssessmentGroupController extends Controller
             return $record->item->available_points;
         });
 
-        // Calculate classification percentages aggregated across all assessment groups for this building type
+        // ============ MEGA BUILDING CLASSIFICATION DATA (across ALL building types) ============
+        $megaClassificationData = $this->assessmentGroupService->getMegaBuildingClassificationData($megaBuilding);
+
+        // ============ BUILDING TYPE CLASSIFICATION DATA (for current building type only) ============
         $classificationData = [
             'Sustainable' => ['earned' => 0, 'available' => 0],
             'Healthy' => ['earned' => 0, 'available' => 0],
@@ -76,7 +79,7 @@ class AssessmentGroupController extends Controller
             }
         }
 
-        // Calculate percentages for each classification
+        // Calculate percentages for each classification (Building Type specific)
         $sustainablePercentage = 0;
         $intelligentPercentage = 0;
         $healthyPercentage = 0;
@@ -96,12 +99,25 @@ class AssessmentGroupController extends Controller
             'megaBuilding' => $megaBuilding,
             'buildingType' => $buildingType,
             'groupPercentages' => $groupPercentages,
+            // Mega Building overall data
             'megaBuildingPercentage' => $megaBuildingPercentage,
             'megaBuildingEP' => round($megaBuildingEP, 2),
             'megaBuildingAP' => round($megaBuildingAP, 2),
+            // Mega Building classification data (across ALL building types)
+            'megaSustainablePercentage' => $megaClassificationData['Sustainable']['percentage'],
+            'megaSustainableEP' => $megaClassificationData['Sustainable']['earned'],
+            'megaSustainableAP' => $megaClassificationData['Sustainable']['available'],
+            'megaHealthyPercentage' => $megaClassificationData['Healthy']['percentage'],
+            'megaHealthyEP' => $megaClassificationData['Healthy']['earned'],
+            'megaHealthyAP' => $megaClassificationData['Healthy']['available'],
+            'megaIntelligentPercentage' => $megaClassificationData['Intelligent']['percentage'],
+            'megaIntelligentEP' => $megaClassificationData['Intelligent']['earned'],
+            'megaIntelligentAP' => $megaClassificationData['Intelligent']['available'],
+            // Building Type specific data
             'buildingTypeAveragePercentage' => $buildingTypeAveragePercentage,
             'buildingTypeEP' => round($buildingTypeEP, 2),
             'buildingTypeAP' => round($buildingTypeAP, 2),
+            // Building Type classification data (current building type only)
             'sustainablePercentage' => $sustainablePercentage,
             'sustainableEP' => round($classificationData['Sustainable']['earned'], 2),
             'sustainableAP' => round($classificationData['Sustainable']['available'], 2),
