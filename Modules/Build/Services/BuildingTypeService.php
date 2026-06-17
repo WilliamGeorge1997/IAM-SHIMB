@@ -17,7 +17,9 @@ class BuildingTypeService
     public function getBuildingTypePercentages(MegaBuilding $megaBuilding, BuildingType $buildingType): array
     {
 
-        $items = Item::where('type', 'Optional')->get();
+        $items = Item::where('type', 'Optional')
+            ->where('building_type_id', $buildingType->id)
+            ->get();
 
         $itemIds = $items->pluck('id')->toArray();
         $earnedPoints = ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)

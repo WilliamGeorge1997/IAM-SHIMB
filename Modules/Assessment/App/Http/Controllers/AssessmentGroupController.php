@@ -22,7 +22,7 @@ class AssessmentGroupController extends Controller
      */
     public function index(MegaBuilding $megaBuilding, BuildingType $buildingType)
     {
-        $assessmentGroups = $this->assessmentGroupService->findAll();
+        $assessmentGroups = $this->assessmentGroupService->findAll($buildingType);
         $groupPercentages = [];
         foreach ($assessmentGroups as $group) {
             $groupPercentages[$group->id] = $this->assessmentGroupService->getGroupPercentages($megaBuilding, $buildingType, $group);

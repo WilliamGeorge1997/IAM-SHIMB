@@ -69,6 +69,7 @@ class SpecialBuildingSeeder extends Seeder
                 [
                     'name'                => $itemName,
                     'assessment_group_id' => $group->id,
+                    'building_type_id'    => $this->buildingTypeId,
                 ],
                 [
                     'description'      => $description,
@@ -171,7 +172,8 @@ class SpecialBuildingSeeder extends Seeder
     private function getOrCreateGroup(string $name): AssessmentGroup
     {
         return AssessmentGroup::firstOrCreate([
-            'name' => $this->normalize($name)
+            'name' => $this->normalize($name),
+            'building_type_id' => $this->buildingTypeId,
         ]);
     }
 

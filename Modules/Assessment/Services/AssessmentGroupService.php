@@ -10,14 +10,21 @@ use Modules\Build\App\Models\MegaBuilding;
 
 class AssessmentGroupService
 {
-    function findAll()
+    /**
+     * Get all assessment groups for a specific building type.
+     */
+    function findAll(?BuildingType $buildingType = null)
     {
+        if ($buildingType) {
+            return AssessmentGroup::where('building_type_id', $buildingType->id)->get();
+        }
         return AssessmentGroup::all();
     }
 
     public function getGroupPercentagesWithData(MegaBuilding $megaBuilding, BuildingType $buildingType, AssessmentGroup $assessmentGroup): array
     {
         $items = Item::where('assessment_group_id', $assessmentGroup->id)
+            ->where('building_type_id', $buildingType->id)
             ->where('type', 'Optional')
             ->get();
 
@@ -51,6 +58,7 @@ class AssessmentGroupService
     public function getGroupPercentages(MegaBuilding $megaBuilding, BuildingType $buildingType, AssessmentGroup $assessmentGroup): array
     {
         $items = Item::where('assessment_group_id', $assessmentGroup->id)
+            ->where('building_type_id', $buildingType->id)
             ->where('type', 'Optional')
             ->get();
 
@@ -98,9 +106,11 @@ class AssessmentGroupService
 
         foreach ($classifications as $classification) {
 
-            $items = Item::where('classification', $classification)->get();
-
             if ($buildingType) {
+
+                $items = Item::where('classification', $classification)
+                    ->where('building_type_id', $buildingType->id)
+                    ->get();
 
                 $itemIds = $items->pluck('id')->toArray();
                 $earnedPoints = ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
@@ -146,6 +156,11 @@ class AssessmentGroupService
                 $totalEssentialCount = 0;
 
                 foreach ($allBuildingTypes as $bt) {
+
+                    $items = Item::where('classification', $classification)
+                        ->where('building_type_id', $bt->id)
+                        ->get();
+
                     $itemIds = $items->pluck('id')->toArray();
                     $earnedPoints = ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
                         ->where('building_type_id', $bt->id)
@@ -189,7 +204,7 @@ class AssessmentGroupService
     public function getBuildingTypeAveragePercentage(MegaBuilding $megaBuilding, BuildingType $buildingType): float
     {
 
-        $assessmentGroups = AssessmentGroup::all();
+        $assessmentGroups = AssessmentGroup::where('building_type_id', $buildingType->id)->get();
 
         if ($assessmentGroups->isEmpty()) {
             return 0.0;
@@ -201,6 +216,7 @@ class AssessmentGroupService
 
         foreach ($assessmentGroups as $group) {
             $optionalItems = Item::where('assessment_group_id', $group->id)
+                ->where('building_type_id', $buildingType->id)
                 ->where('type', 'Optional')
                 ->get();
 
