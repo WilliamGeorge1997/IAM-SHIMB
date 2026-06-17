@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\SpecialBuildingSeeder;
 use Illuminate\Database\Seeder;
 use Modules\User\Database\Seeders\UserDatabaseSeeder;
 
@@ -14,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UserDatabaseSeeder::class,
+            SpecialBuildingSeeder::class
         ]);
     }
 }

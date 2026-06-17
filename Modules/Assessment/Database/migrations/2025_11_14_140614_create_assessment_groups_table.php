@@ -17,26 +17,26 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        $assessmentGroups = [
-            ['name' => 'Site & Environment - Assessment Group'],
-            ['name' => 'Air - Assessment Group'],
-            ['name' => 'Water - Assessment Group'],
-            ['name' => 'Energy - Assessment Group'],
-            ['name' => 'Mobility - Assessment Group'],
-            ['name' => 'Material - Assessment Group'],
-            ['name' => 'Visual Quality - Assessment Group'],
-            ['name' => 'Acoustic Quality'],
-            ['name' => 'Nourishment - Assessment Group'],
-            ['name' => 'Fitness - Assessment Group'],
-            ['name' => 'Mind - Assessment Group'],
-            ['name' => 'Community - Assessment Group'],
-            ['name' => 'Innovation - Assessment Group'],
-            ['name' => 'Safety - Assessment Group'],
-            ['name' => 'Security - Assessment Group'],
-            ['name' => 'Services - Assessment Group'],
-            ['name' => 'AI-Full Autonomous Buildings - Assessment Group'],
-        ];
-        AssessmentGroup::insert($assessmentGroups);
+        // $assessmentGroups = [
+        //     ['name' => 'Site & Environment - Assessment Group'],
+        //     ['name' => 'Air - Assessment Group'],
+        //     ['name' => 'Water - Assessment Group'],
+        //     ['name' => 'Energy - Assessment Group'],
+        //     ['name' => 'Mobility - Assessment Group'],
+        //     ['name' => 'Material - Assessment Group'],
+        //     ['name' => 'Visual Quality - Assessment Group'],
+        //     ['name' => 'Acoustic Quality'],
+        //     ['name' => 'Nourishment - Assessment Group'],
+        //     ['name' => 'Fitness - Assessment Group'],
+        //     ['name' => 'Mind - Assessment Group'],
+        //     ['name' => 'Community - Assessment Group'],
+        //     ['name' => 'Innovation - Assessment Group'],
+        //     ['name' => 'Safety - Assessment Group'],
+        //     ['name' => 'Security - Assessment Group'],
+        //     ['name' => 'Services - Assessment Group'],
+        //     ['name' => 'AI-Full Autonomous Buildings - Assessment Group'],
+        // ];
+        // AssessmentGroup::insert($assessmentGroups);
     }
 
     /**
