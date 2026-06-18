@@ -171,8 +171,9 @@ class SpecialBuildingSeeder extends Seeder
 
     private function getOrCreateGroup(string $name): AssessmentGroup
     {
+        $cleanName = trim(preg_replace('/\s+/', ' ', $name));
         return AssessmentGroup::firstOrCreate([
-            'name' => $this->normalize($name),
+            'name' => $cleanName,
             'building_type_id' => $this->buildingTypeId,
         ]);
     }

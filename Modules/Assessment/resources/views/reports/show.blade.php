@@ -82,6 +82,12 @@
                                     <i class="bi bi-speedometer2 me-2"></i>Gauges
                                 </button>
                             </li>
+                            <li class="nav-item flex-fill" role="presentation">
+                                <button class="nav-link w-100" id="rank-tab" data-bs-toggle="tab" data-bs-target="#rank"
+                                    type="button" role="tab">
+                                    <i class="bi bi-award me-2"></i>Rank
+                                </button>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-body">
@@ -342,6 +348,71 @@
                                             </div>
                                         @endforeach
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Rank Tab -->
+                            <div class="tab-pane fade" id="rank" role="tabpanel">
+                                <div class="row g-4 justify-content-center mt-2 pb-5">
+                                    <div class="col-md-10 text-center mb-3">
+                                        <h3 class="fw-bold mb-2"><i class="bi bi-award-fill text-primary me-2"></i>CERTIFICATION LEVELS</h3>
+                                        <p class="text-muted">Ranking based on earned points percentage for <span class="fw-bold">{{ $megaBuilding->name }}</span></p>
+                                    </div>
+                                    
+                                    <!-- Overall Rank -->
+                                    <div class="col-md-8 col-lg-6 mb-4">
+                                        @php
+                                            $totalEP = ($megaBuildingData['Sustainable']['ep'] ?? 0) + ($megaBuildingData['Healthy']['ep'] ?? 0) + ($megaBuildingData['Intelligent']['ep'] ?? 0);
+                                            $totalAP = ($megaBuildingData['Sustainable']['total'] ?? 0) + ($megaBuildingData['Healthy']['total'] ?? 0) + ($megaBuildingData['Intelligent']['total'] ?? 0);
+                                        @endphp
+                                        <div class="card shadow border-0 h-100 text-center position-relative overflow-hidden" style="background: linear-gradient(135deg, #FFB380 0%, #D84315 100%); color: #fff; border-radius: 1rem;">
+                                            <div class="card-body p-5">
+                                                <h5 class="fw-bold mb-3 opacity-75">OVERALL IAM-SHIMB RANK</h5>
+                                                <h1 class="display-3 fw-bold mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">{{ $megaBuildingRanks['Overall']['rank'] }}</h1>
+                                                <div class="fs-4 fw-semibold">{{ $overallMegaBuildingPercentage }}% Earned Points</div>
+                                                <div class="fs-6 mt-2 opacity-75">EP: {{ round($totalEP, 2) }} / AP: {{ round($totalAP, 2) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="w-100"></div>
+
+                                    <!-- Sustainable Rank -->
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card shadow-sm border-0 h-100 text-center" style="background: linear-gradient(135deg, #90caf9 0%, #1565c0 100%); color: #fff; border-radius: 1rem;">
+                                            <div class="card-body p-4">
+                                                <h6 class="fw-bold mb-3 opacity-75">SUSTAINABLE</h6>
+                                                <h2 class="fw-bold mb-3" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{{ $megaBuildingRanks['Sustainable']['rank'] }}</h2>
+                                                <div class="fs-5 fw-semibold">{{ $megaBuildingData['Sustainable']['percentage'] ?? 0 }}%</div>
+                                                <div class="fs-6 mt-1 opacity-75">EP: {{ round($megaBuildingData['Sustainable']['ep'] ?? 0, 2) }} / AP: {{ round($megaBuildingData['Sustainable']['total'] ?? 0, 2) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Healthy Rank -->
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card shadow-sm border-0 h-100 text-center" style="background: linear-gradient(135deg, #81c784 0%, #1b5e20 100%); color: #fff; border-radius: 1rem;">
+                                            <div class="card-body p-4">
+                                                <h6 class="fw-bold mb-3 opacity-75">HEALTHY</h6>
+                                                <h2 class="fw-bold mb-3" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{{ $megaBuildingRanks['Healthy']['rank'] }}</h2>
+                                                <div class="fs-5 fw-semibold">{{ $megaBuildingData['Healthy']['percentage'] ?? 0 }}%</div>
+                                                <div class="fs-6 mt-1 opacity-75">EP: {{ round($megaBuildingData['Healthy']['ep'] ?? 0, 2) }} / AP: {{ round($megaBuildingData['Healthy']['total'] ?? 0, 2) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Intelligent Rank -->
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card shadow-sm border-0 h-100 text-center" style="background: linear-gradient(135deg, #ffb74d 0%, #e65100 100%); color: #fff; border-radius: 1rem;">
+                                            <div class="card-body p-4">
+                                                <h6 class="fw-bold mb-3 opacity-75">INTELLIGENT</h6>
+                                                <h2 class="fw-bold mb-3" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{{ $megaBuildingRanks['Intelligent']['rank'] }}</h2>
+                                                <div class="fs-5 fw-semibold">{{ $megaBuildingData['Intelligent']['percentage'] ?? 0 }}%</div>
+                                                <div class="fs-6 mt-1 opacity-75">EP: {{ round($megaBuildingData['Intelligent']['ep'] ?? 0, 2) }} / AP: {{ round($megaBuildingData['Intelligent']['total'] ?? 0, 2) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

@@ -309,8 +309,7 @@
                                             </td>
                                             <td style="padding: 0.5rem;">
                                                 <span class="fw-semibold"
-                                                    style="font-size: 0.8rem;">{{ $assessmentGroup->name }} -
-                                                    {{ $item->name }}</span>
+                                                    style="font-size: 0.8rem;">{{ $item->name }}</span>
                                             </td>
                                             <td style="padding: 0.5rem;">
                                                 <span style="font-size: 0.8rem;">{{ $item->description }}</span>

@@ -8,12 +8,15 @@ use App\Http\Controllers\Controller;
 use Modules\Build\App\Models\BuildingType;
 use Modules\Build\App\Models\MegaBuilding;
 use Modules\Assessment\Services\AssessmentGroupService;
+use Modules\Assessment\Services\RankingService;
 use Modules\Build\App\Models\BuildingType as BuildBuildingType;
 
 final class ReportController extends Controller
 {
-    public function __construct(private AssessmentGroupService $assessmentGroupService)
-    {
+    public function __construct(
+        private AssessmentGroupService $assessmentGroupService,
+        private RankingService $rankingService
+    ) {
     }
 
     public function show(MegaBuilding $megaBuilding): \Illuminate\Contracts\View\View
@@ -65,6 +68,26 @@ final class ReportController extends Controller
             $buildingTypesOverall[$buildingTypeId] = round(($sustPct + $healthPct + $intelPct) / 3, 2);
         }
 
+        // Calculate Ranks using the service
+        $megaBuildingRanks = [
+            'Overall' => [
+                'rank' => $this->rankingService->getRank($overallMegaBuildingPercentage),
+                'color' => $this->rankingService->getBadgeColor($this->rankingService->getRank($overallMegaBuildingPercentage))
+            ],
+            'Sustainable' => [
+                'rank' => $this->rankingService->getRank($sustainablePct),
+                'color' => $this->rankingService->getBadgeColor($this->rankingService->getRank($sustainablePct))
+            ],
+            'Healthy' => [
+                'rank' => $this->rankingService->getRank($healthyPct),
+                'color' => $this->rankingService->getBadgeColor($this->rankingService->getRank($healthyPct))
+            ],
+            'Intelligent' => [
+                'rank' => $this->rankingService->getRank($intelligentPct),
+                'color' => $this->rankingService->getBadgeColor($this->rankingService->getRank($intelligentPct))
+            ]
+        ];
+
         return view('assessment::reports.show', [
             'megaBuilding' => $megaBuilding,
             'buildingTypes' => $buildingTypes,
@@ -75,6 +98,7 @@ final class ReportController extends Controller
             'averageHealthy' => $averageHealthy,
             'averageIntelligent' => $averageIntelligent,
             'buildingTypesOverall' => $buildingTypesOverall,
+            'megaBuildingRanks' => $megaBuildingRanks,
         ]);
     }
 }
