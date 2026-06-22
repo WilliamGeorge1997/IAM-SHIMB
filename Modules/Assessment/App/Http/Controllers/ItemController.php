@@ -6,6 +6,7 @@ namespace Modules\Assessment\App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Modules\Assessment\App\Models\Item;
 use Modules\Build\App\Models\BuildingType;
 use Modules\Build\App\Models\MegaBuilding;
 use Modules\Assessment\Services\ItemService;
@@ -32,33 +33,24 @@ final class ItemController extends Controller
         $buildingTypeAveragePercentage = $assessmentGroupService->getBuildingTypeAveragePercentage($megaBuilding, $buildingType);
 
 
-        $megaBuildingEP = 0;
-        $megaBuildingAP = 0;
-        $megaBuildingRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
+        // EP for Mega Building from evaluated records; AP from ALL Optional items (true total pool)
+        $megaBuildingEarnedRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
             ->with('item')
             ->get()
-            ->filter(function ($record) {
-                return $record->item && $record->item->type === 'Optional';
-            });
-        $megaBuildingEP = $megaBuildingRecords->sum('earned_points');
-        $megaBuildingAP = $megaBuildingRecords->sum(function ($record) {
-            return $record->item->available_points;
-        });
+            ->filter(fn($r) => $r->item && $r->item->type === 'Optional');
+        $megaBuildingEP = $megaBuildingEarnedRecords->sum('earned_points');
+        $megaBuildingAP = Item::where('type', 'Optional')->sum('available_points');
 
-
-        $buildingTypeEP = 0;
-        $buildingTypeAP = 0;
-        $buildingTypeRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
+        // EP for Building Type from evaluated records; AP from ALL Optional items of this building type
+        $buildingTypeEarnedRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
             ->where('building_type_id', $buildingType->id)
             ->with('item')
             ->get()
-            ->filter(function ($record) {
-                return $record->item && $record->item->type === 'Optional';
-            });
-        $buildingTypeEP = $buildingTypeRecords->sum('earned_points');
-        $buildingTypeAP = $buildingTypeRecords->sum(function ($record) {
-            return $record->item->available_points;
-        });
+            ->filter(fn($r) => $r->item && $r->item->type === 'Optional');
+        $buildingTypeEP = $buildingTypeEarnedRecords->sum('earned_points');
+        $buildingTypeAP = Item::where('type', 'Optional')
+            ->where('building_type_id', $buildingType->id)
+            ->sum('available_points');
 
 
         $classificationData = $assessmentGroupService->getGroupPercentagesWithData($megaBuilding, $buildingType, $assessmentGroup);

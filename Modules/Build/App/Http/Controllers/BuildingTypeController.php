@@ -4,6 +4,7 @@ namespace Modules\Build\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\Assessment\App\Models\Item;
 use Modules\Build\App\Models\MegaBuilding;
 use Modules\Build\Services\BuildingTypeService;
 
@@ -28,42 +29,37 @@ class BuildingTypeController extends Controller
             );
         }
 
-        // Calculate mega building EP and AP - only count earned/applied points
-        $megaBuildingEP = 0;
-        $megaBuildingAP = 0;
-        $megaBuildingRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $mega_building->id)
+        // Calculate mega building EP (from earned records) and AP (from ALL optional items — the true total pool)
+        $megaBuildingEarnedRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $mega_building->id)
             ->with('item')
             ->get()
-            ->filter(function ($record) {
-                return $record->item && $record->item->type === 'Optional';
-            });
-        $megaBuildingEP = $megaBuildingRecords->sum('earned_points');
-        $megaBuildingAP = $megaBuildingRecords->sum(function ($record) {
-            return $record->item->available_points;
-        });
+            ->filter(fn($record) => $record->item && $record->item->type === 'Optional');
 
-        // Calculate classification EP and AP - only count earned/applied points
+        $megaBuildingEP = $megaBuildingEarnedRecords->sum('earned_points');
+
+        // AP = total available points across ALL Optional items (not limited to evaluated ones)
+        $megaBuildingAP = Item::where('type', 'Optional')->sum('available_points');
+
+        // Classification EP from earned records; AP from ALL Optional items of that classification
         $classificationData = [
             'Sustainable' => ['earned' => 0, 'available' => 0],
-            'Healthy' => ['earned' => 0, 'available' => 0],
+            'Healthy'     => ['earned' => 0, 'available' => 0],
             'Intelligent' => ['earned' => 0, 'available' => 0],
         ];
 
-        // Get all earned points for this mega building, filter by Optional items
-        $allEarnedPoints = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $mega_building->id)
-            ->with('item')
-            ->get()
-            ->filter(function ($record) {
-                return $record->item && $record->item->type === 'Optional';
-            });
-
-        // Group by classification and sum earned/available points
-        foreach ($allEarnedPoints as $record) {
-            $classification = $record->item->classification;
-            if (isset($classificationData[$classification])) {
-                $classificationData[$classification]['earned'] += $record->earned_points;
-                $classificationData[$classification]['available'] += $record->item->available_points;
+        // Sum earned per classification from ItemEarnedPoint records
+        foreach ($megaBuildingEarnedRecords as $record) {
+            $cls = $record->item->classification;
+            if (isset($classificationData[$cls])) {
+                $classificationData[$cls]['earned'] += $record->earned_points;
             }
+        }
+
+        // Sum available per classification from ALL Optional items (correct denominator)
+        foreach (array_keys($classificationData) as $cls) {
+            $classificationData[$cls]['available'] = Item::where('type', 'Optional')
+                ->where('classification', $cls)
+                ->sum('available_points');
         }
 
         $buildingTypeEP = $megaBuildingEP;

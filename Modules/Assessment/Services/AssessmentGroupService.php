@@ -261,26 +261,28 @@ class AssessmentGroupService
     {
         $classificationData = [
             'Sustainable' => ['earned' => 0, 'available' => 0],
-            'Healthy' => ['earned' => 0, 'available' => 0],
+            'Healthy'     => ['earned' => 0, 'available' => 0],
             'Intelligent' => ['earned' => 0, 'available' => 0],
         ];
 
-        // Get all earned points for this mega building, filter by Optional items
-        // This only includes items that have been evaluated (have ItemEarnedPoint records)
+        // EP: only items that have been evaluated (have ItemEarnedPoint records)
         $allEarnedPoints = ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
             ->with('item')
             ->get()
-            ->filter(function ($record) {
-                return $record->item && $record->item->type === 'Optional';
-            });
+            ->filter(fn($record) => $record->item && $record->item->type === 'Optional');
 
-        // Group by classification and sum earned/available points
         foreach ($allEarnedPoints as $record) {
             $classification = $record->item->classification;
             if (isset($classificationData[$classification])) {
                 $classificationData[$classification]['earned'] += $record->earned_points;
-                $classificationData[$classification]['available'] += $record->item->available_points;
             }
+        }
+
+        // AP: ALL Optional items per classification (true total pool, not limited to evaluated ones)
+        foreach (array_keys($classificationData) as $cls) {
+            $classificationData[$cls]['available'] = Item::where('type', 'Optional')
+                ->where('classification', $cls)
+                ->sum('available_points');
         }
 
         // Calculate percentages
@@ -291,8 +293,8 @@ class AssessmentGroupService
                 $percentage = round(($data['earned'] / $data['available']) * 100, 2);
             }
             $result[$classification] = [
-                'earned' => round($data['earned'], 2),
-                'available' => round($data['available'], 2),
+                'earned'     => round($data['earned'], 2),
+                'available'  => round($data['available'], 2),
                 'percentage' => $percentage,
             ];
         }

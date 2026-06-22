@@ -4,6 +4,7 @@ namespace Modules\Assessment\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\Assessment\App\Models\Item;
 use Modules\Assessment\Services\AssessmentGroupService;
 use Modules\Assessment\Services\ItemService;
 use Modules\Build\App\Models\BuildingType;
@@ -32,34 +33,28 @@ class AssessmentGroupController extends Controller
         $megaBuildingPercentage = $this->itemService->getMegaBuildingPercentage($megaBuilding);
         $buildingTypeAveragePercentage = $this->assessmentGroupService->getBuildingTypeAveragePercentage($megaBuilding, $buildingType);
 
-        // Calculate EP and AP for Mega Building
-        $megaBuildingEP = 0;
-        $megaBuildingAP = 0;
-        $megaBuildingRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
+        // Calculate EP for Mega Building (from earned records) — AP from the full Item pool
+        $megaBuildingEarnedRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
             ->with('item')
             ->get()
-            ->filter(function ($record) {
-                return $record->item && $record->item->type === 'Optional';
-            });
-        $megaBuildingEP = $megaBuildingRecords->sum('earned_points');
-        $megaBuildingAP = $megaBuildingRecords->sum(function ($record) {
-            return $record->item->available_points;
-        });
+            ->filter(fn($r) => $r->item && $r->item->type === 'Optional');
 
-        // Calculate EP and AP for Building Type
-        $buildingTypeEP = 0;
-        $buildingTypeAP = 0;
-        $buildingTypeRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
+        $megaBuildingEP = $megaBuildingEarnedRecords->sum('earned_points');
+        // AP = ALL optional items across all building types (true total pool)
+        $megaBuildingAP = Item::where('type', 'Optional')->sum('available_points');
+
+        // Calculate EP for Building Type (from earned records) — AP from the Item pool for this building type
+        $buildingTypeEarnedRecords = \Modules\Assessment\App\Models\ItemEarnedPoint::where('mega_building_id', $megaBuilding->id)
             ->where('building_type_id', $buildingType->id)
             ->with('item')
             ->get()
-            ->filter(function ($record) {
-                return $record->item && $record->item->type === 'Optional';
-            });
-        $buildingTypeEP = $buildingTypeRecords->sum('earned_points');
-        $buildingTypeAP = $buildingTypeRecords->sum(function ($record) {
-            return $record->item->available_points;
-        });
+            ->filter(fn($r) => $r->item && $r->item->type === 'Optional');
+
+        $buildingTypeEP = $buildingTypeEarnedRecords->sum('earned_points');
+        // AP = ALL optional items belonging to this building type (true pool for this type)
+        $buildingTypeAP = Item::where('type', 'Optional')
+            ->where('building_type_id', $buildingType->id)
+            ->sum('available_points');
 
         // ============ MEGA BUILDING CLASSIFICATION DATA (across ALL building types) ============
         $megaClassificationData = $this->assessmentGroupService->getMegaBuildingClassificationData($megaBuilding);
